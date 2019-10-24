@@ -14,12 +14,10 @@ import javafx.fxml.Initializable;
  *
  * @author ciang
  */
-public class HomeController implements Initializable {
+public class SignUpController implements Initializable {
 
     /**
      * Initializes the controller class.
-     * @param url
-     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
