@@ -44,8 +44,8 @@
             </AnchorPane>
          </children>
       </StackPane>
-      <Button fx:id="button" layoutX="324.0" layoutY="288.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Login" textFill="WHITE" />
-      <Hyperlink layoutX="199.0" layoutY="294.0" text="Buat Akun">
+      <Button fx:id="button" layoutX="324.0" layoutY="288.0" mnemonicParsing="false" onAction="#handleLoginButtonAction" text="Login" textFill="WHITE" />
+      <Hyperlink layoutX="199.0" layoutY="294.0" text="Buat Akun" onAction="#handleSignUpLinkAction">
          <font>
             <Font size="11.0" />
          </font>
