@@ -8,22 +8,14 @@
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
-
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane prefHeight="400.0" prefWidth="600.0">
          <children>
-            <ImageView fitHeight="48.0" fitWidth="181.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Downloads/PicsArt_10-23-10.57.36.png" />
-               </image>
-            </ImageView>
             <MenuButton layoutX="484.0" layoutY="1.0" mnemonicParsing="false" text="MenuButton">
               <items>
                 <MenuItem mnemonicParsing="false" text="Action 1" />
