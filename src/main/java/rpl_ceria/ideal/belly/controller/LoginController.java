@@ -16,6 +16,11 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 
+/**
+ * FXML Controller class
+ *
+ * @author nathania
+ */
 public class LoginController implements Initializable {
     
     @FXML
@@ -28,7 +33,7 @@ public class LoginController implements Initializable {
 //    private Label error;
     
     @FXML
-    private void handleButtonAction(ActionEvent event) throws IOException {
+    private void handleLoginButtonAction(ActionEvent event) throws IOException {
         String name = email.getText();
         String pass = password.getText();
 //       error.setText("");
@@ -50,6 +55,20 @@ public class LoginController implements Initializable {
         }
         
     }
+    
+    @FXML
+    private void handleSignUpLinkAction(ActionEvent event) throws IOException {
+        System.out.println("Request Sign Up");
+        
+        Parent root= FXMLLoader.load(getClass().getResource("/fxml/SignUp.fxml"));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add("/styles/SignUpStyles.css");
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        window.setScene(scene);
+        window.show();
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
