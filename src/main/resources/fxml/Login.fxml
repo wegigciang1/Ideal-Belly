@@ -13,7 +13,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: yellow;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rpl_ceria.ideal.belly.controller.LoginController">
     <children>
-      <StackPane prefHeight="402.0" prefWidth="600.0">
+      <StackPane prefHeight="400.0" prefWidth="600.0">
          <children>
             <AnchorPane prefHeight="321.0" prefWidth="427.0">
                <children>

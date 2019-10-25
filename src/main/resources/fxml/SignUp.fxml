@@ -5,30 +5,33 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.StackPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.SignUpController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.SignUpController">
    <children>
-      <AnchorPane layoutY="-4.0" prefHeight="409.0" prefWidth="621.0">
+      <StackPane prefHeight="400.0" prefWidth="600.0">
          <children>
-            <TextField layoutX="169.0" layoutY="103.0" />
-            <Label layoutX="169.0" layoutY="128.0" text="Email" />
-            <Label layoutX="169.0" layoutY="83.0" text="Nama" />
-            <TextField layoutX="169.0" layoutY="146.0" />
-            <Label layoutX="173.0" layoutY="171.0" text="Password" />
-            <PasswordField layoutX="171.0" layoutY="192.0" />
-            <Label layoutX="259.0" layoutY="31.0" prefHeight="52.0" prefWidth="171.0" text="SIGN UP">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Button layoutX="441.0" layoutY="305.0" mnemonicParsing="false" style="-fx-background-color: yellow;" text="SIGN UP" textAlignment="RIGHT" />
-            <Label layoutX="173.0" layoutY="224.0" text="Tanggal Lahir" />
-            <Label layoutX="174.0" layoutY="266.0" text="Tinggi Badan" />
-            <TextField layoutX="169.0" layoutY="241.0" />
-            <TextField layoutX="169.0" layoutY="293.0" />
+            <AnchorPane prefHeight="400.0" prefWidth="600.0">
+               <children>
+                  <AnchorPane layoutX="126.0" layoutY="41.0" prefHeight="318.0" prefWidth="343.0">
+                     <children>
+                        <Label layoutX="184.0" layoutY="44.0" text="Sign Up" />
+                        <Label layoutX="71.0" layoutY="138.0" text="Email" />
+                        <TextField layoutX="132.0" layoutY="233.0" />
+                        <Label layoutX="70.0" layoutY="93.0" text="Nama" />
+                        <TextField layoutX="132.0" layoutY="197.0" />
+                        <Label layoutX="51.0" layoutY="164.0" text="Password" />
+                        <PasswordField layoutX="132.0" layoutY="159.0" />
+                        <Label layoutX="27.0" layoutY="202.0" text="Tanggal Lahir" />
+                        <TextField layoutX="132.0" layoutY="125.0" />
+                        <Button layoutX="222.0" layoutY="269.0" mnemonicParsing="false" text="SIGN UP" textAlignment="RIGHT" />
+                        <TextField layoutX="132.0" layoutY="88.0" />
+                        <Label layoutX="29.0" layoutY="238.0" text="Tinggi Badan" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
          </children>
-      </AnchorPane>
+      </StackPane>
    </children>
 </AnchorPane>
