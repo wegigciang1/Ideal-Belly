@@ -10,6 +10,21 @@ import java.sql.SQLException;
  */
 public class UserDAO {
     
+    public static void addUser(User usr) throws SQLException, ClassNotFoundException{
+        String addStmt = "INSERT INTO user VALUES('";
+        addStmt = addStmt.concat(usr.getEmail() + "','");
+        addStmt = addStmt.concat(usr.getPassword() + "','");
+        addStmt = addStmt.concat(usr.getNama() + "',");
+        addStmt = addStmt.concat(usr.getTanggal_lahir() + ",");
+        addStmt = addStmt.concat(usr.getTinggi_badan() + ")");
+        try{
+            DBUtil.getInstance().dbExecuteQuery(addStmt);
+        }catch (SQLException e){
+            System.out.println("Insert Failed " + e);
+            throw e;
+        }
+    }
+    
     public static User searchUser(String email, String password) throws SQLException, ClassNotFoundException {
         String selectStmt = "SELECT * FROM user WHERE email='" + email 
                 + "' AND password='" + password + "'";
@@ -48,7 +63,7 @@ public class UserDAO {
                 : updateStmt;
         
         updateStmt = updateStmt.concat(" password='" + usr.getPassword() + "',");
-        updateStmt = updateStmt.concat(" tanggal_lahir=" + usr.getTanggal_lahir() + ",");
+        updateStmt = updateStmt.concat(" tanggal_lahir='" + usr.getTanggal_lahir() + "',");
         updateStmt = updateStmt.concat(" tinggi_badan=" + usr.getTinggi_badan());
         
         updateStmt = updateStmt.concat(" WHERE id=" + id);
