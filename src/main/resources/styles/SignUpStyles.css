@@ -16,3 +16,16 @@
 .pane{
     -fx-background-color: white;
 }
+
+.input{
+    -fx-padding: 1 1 1 1;
+    -fx-border-bottom: solid 1px #FFFFFF;
+    -fx-background-color: #FFFFFF;
+    -fx-background-color: -fx-text-box-border, -fx-background;
+    -fx-background-insets: 0, 0 0 1 0 ;
+   
+}
+
+.input:focused{
+    -fx-background-color: -fx-focus-color, -fx-background;
+}
