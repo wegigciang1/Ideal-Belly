@@ -3,6 +3,8 @@ package rpl_ceria.ideal.belly.db;
 import rpl_ceria.ideal.belly.model.User;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -25,9 +27,10 @@ public class UserDAO {
         }
     }
     
-    public static User searchUser(String email, String password) throws SQLException, ClassNotFoundException {
+    public static User searchUser(String email, String password) throws SQLException, ClassNotFoundException, ParseException {
         String selectStmt = "SELECT * FROM user WHERE email='" + email 
                 + "' AND password='" + password + "'";
+        System.out.println("Email : " + email + ",  Password : " + password);
         try {
             ResultSet rsUsr = DBUtil.getInstance().dbExecuteQuery(selectStmt);
             User user = getUserFromResultSet(rsUsr);
@@ -38,7 +41,7 @@ public class UserDAO {
         }
     }
 
-    private static User getUserFromResultSet(ResultSet rs) throws SQLException {
+    private static User getUserFromResultSet(ResultSet rs) throws SQLException, ParseException {
         User usr = null;
         if (rs.next()) {
             usr = new User();
@@ -46,7 +49,9 @@ public class UserDAO {
             usr.setEmail(rs.getString("email"));
             usr.setPassword(rs.getString("password"));
             usr.setNama(rs.getString("nama"));
-            usr.setTanggal_lahir(rs.getDate("tanggal_lahir"));
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-mm-yyyy");
+            usr.setTanggal_lahir(formatter.parse(rs.getString("tanggal_lahir")));
+//            usr.setTanggal_lahir(rs.getDate("tanggal_lahir"));
             usr.setTinggi_badan(rs.getDouble("tinggi_badan"));
         }
         return usr;

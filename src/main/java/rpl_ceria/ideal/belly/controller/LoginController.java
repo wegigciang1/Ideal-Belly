@@ -3,6 +3,7 @@ package rpl_ceria.ideal.belly.controller;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -32,13 +33,16 @@ public class LoginController implements Initializable {
     private PasswordField password;
     
     @FXML
-    private void handleLoginButtonAction(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
+    private void handleLoginButtonAction(ActionEvent event) throws IOException, SQLException, ClassNotFoundException, ParseException {
         String emailUser = email.getText();
         String passwordUser = password.getText();
         
         User user = UserDAO.searchUser(emailUser, passwordUser);
         
-        if(emailUser.equals("ciang") && passwordUser.equals("1234")) {
+        if(user != null) {
+            System.out.println("User get");
+            System.out.println(user.getNama());
+        
             System.out.println("Login Berhasil");
             
             Parent root= FXMLLoader.load(getClass().getResource("/fxml/Home.fxml"));

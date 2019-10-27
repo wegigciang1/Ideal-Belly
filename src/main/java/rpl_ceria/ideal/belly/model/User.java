@@ -5,7 +5,7 @@
  */
 package rpl_ceria.ideal.belly.model;
 
-import java.sql.Date;
+import java.util.Date;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.SimpleDoubleProperty;
