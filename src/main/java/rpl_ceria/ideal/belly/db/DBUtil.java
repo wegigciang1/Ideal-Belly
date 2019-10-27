@@ -47,7 +47,7 @@ public class DBUtil {
     private String getUrlDB() {
         try {
             Properties prop = new Properties();
-            prop.load(getClass().getClassLoader().getResourceAsStream("aplikasi.properties"));
+            prop.load(getClass().getClassLoader().getResourceAsStream("application.properties"));
             return prop.getProperty("data.dir");
         } catch (IOException ex) {
             Logger.getLogger(DBUtil.class.getName()).log(Level.SEVERE, null, ex);

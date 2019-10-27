@@ -5,10 +5,25 @@
  */
 package rpl_ceria.ideal.belly.controller;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.fxml.Initializable;
+
 /**
+ * FXML Controller class
  *
  * @author dewi
  */
-public class ForgotPasswordController {
+public class ForgotPasswordController implements Initializable {
+
+    /**
+     * Initializes the controller class.
+     * @param url
+     * @param rb
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+    }    
     
 }
