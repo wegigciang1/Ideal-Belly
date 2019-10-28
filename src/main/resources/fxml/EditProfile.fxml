@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="anchor_lvl1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane fx:id="anhcor_lvl2" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <AnchorPane fx:id="anchor_lvl3" layoutY="53.0" prefHeight="347.0" prefWidth="600.0" style="-fx-background-color: #BDB8B8;">
+               <children>
+                  <AnchorPane fx:id="bilah_atas" layoutY="-53.0" prefHeight="51.0" prefWidth="600.0" style="-fx-background-color: white;">
+                     <children>
+                        <MenuButton fx:id="menu_dropdown" mnemonicParsing="false" prefHeight="51.0" prefWidth="116.0" text="Menu">
+                          <items>
+                              <MenuItem fx:id="home_SubMenu" mnemonicParsing="false" text="Home" />
+                              <MenuItem mnemonicParsing="false" text="Menu2" />
+                            <MenuItem fx:id="editProfile_subMenu" mnemonicParsing="false" onAction="#editProfileUser" text="Edit Profile" />
+                            <MenuItem fx:id="keluar_subMenu" mnemonicParsing="false" onAction="#signOutProgram" text="Keluar" />
+                          </items>
+                        </MenuButton>
+                        <Label fx:id="selamatDatang_label" layoutX="390.0" layoutY="18.0" text="Selamat Datang, " />
+                        <Label fx:id="namaUser_label" layoutX="504.0" layoutY="18.0" text="Label" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="bilah_kiri" layoutX="6.0" layoutY="6.0" prefHeight="335.0" prefWidth="150.0" style="-fx-background-color: white; -fx-border-radius: 4; -fx-background-radius: 4; -fx-padding: 8;">
+                     <children>
+                        <Label fx:id="username_label" layoutX="42.0" layoutY="54.0" text="Username" />
+                        <Label fx:id="nama_label" layoutX="42.0" layoutY="121.0" text="Nama" />
+                        <Label fx:id="password_label" layoutX="42.0" layoutY="152.0" text="Password" />
+                        <Label fx:id="retypePass_label" layoutX="42.0" layoutY="185.0" text="Retype Pass" />
+                        <Label fx:id="tinggiBadan_label" layoutX="42.0" layoutY="220.0" text="Tinggi Badan" />
+                        <Label fx:id="email_label" layoutX="42.0" layoutY="87.0" text="Email" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="bilah_kanan" layoutX="165.0" layoutY="6.0" prefHeight="337.0" prefWidth="429.0" style="-fx-background-color: white; -fx-border-radius: 4; -fx-background-radius: 4; -fx-padding: 8;">
+                     <children>
+                        <Label layoutX="14.0" layoutY="14.0" text="Edit Profile">
+                           <font>
+                              <Font size="16.0" />
+                           </font></Label>
+                        <TextField fx:id="username_field" layoutX="16.0" layoutY="48.0" promptText="Username" text="Username_Sekarang" />
+                        <TextField fx:id="email_field" layoutX="16.0" layoutY="81.0" promptText="Email" text="Email_sekarang" />
+                        <TextField fx:id="nama_field" layoutX="16.0" layoutY="114.0" promptText="Nama" text="Nama_sekarang" />
+                        <PasswordField fx:id="password_field" layoutX="16.0" layoutY="147.0" promptText="Password" text="Password_sekarang" />
+                        <PasswordField fx:id="retypePass_Field" layoutX="16.0" layoutY="180.0" promptText="Retype_Password" text="Retype_Password" />
+                        <TextField fx:id="tinggi_field" layoutX="16.0" layoutY="213.0" promptText="Tinggi_sekarang" text="154" />
+                        <Button layoutX="202.0" layoutY="260.0" mnemonicParsing="false" text="submit" />
+                     </children></AnchorPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

@@ -17,7 +17,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 import rpl_ceria.ideal.belly.db.UserDAO;
@@ -37,8 +43,29 @@ public class ForgotPasswordController implements Initializable {
      */
     @FXML
     private TextField email;
-    
     @FXML
+    private AnchorPane anchor_lvl1;
+    @FXML
+    private StackPane stackPane_lvl2;
+    @FXML
+    private AnchorPane anchor_lvl3;
+    @FXML
+    private AnchorPane anchor_lvl4;
+    @FXML
+    private ImageView Logo_IdealBelly;
+    @FXML
+    private Label judul_label;
+    @FXML
+    private PasswordField password_field1;
+    @FXML
+    private Button button_submit;
+    @FXML
+    private Label subPassJudul1;
+    @FXML
+    private PasswordField password_field2;
+    @FXML
+    private Label subPassJudul2;
+    
     private void handleResetPasswordButtonAction(ActionEvent event) throws IOException, SQLException, ClassNotFoundException, ParseException {
         String emailUser = email.getText();
         
