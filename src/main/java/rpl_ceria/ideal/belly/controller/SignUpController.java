@@ -63,6 +63,7 @@ public class SignUpController implements Initializable {
                 throw new IOException();
             }
             
+                
             User newuser = new User();
             newuser.setEmail(email.getText());
             newuser.setPassword(password.getText());
@@ -75,9 +76,11 @@ public class SignUpController implements Initializable {
                 JOptionPane.showMessageDialog(null, "Akun berhasil ditambahkan");
                 System.out.println("Sign Up Done");
                 
-                Parent root = FXMLLoader.load(getClass().getResource("/fxml/Home.fxml"));
+                JOptionPane.showMessageDialog(null, "Password berhasil diganti");
+                
+                Parent root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
                 Scene scene = new Scene(root);
-                scene.getStylesheets().add("/styles/Styles.css");
+                scene.getStylesheets().add("/styles/LoginStyles.css");
                 Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
                 window.setScene(scene);

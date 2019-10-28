@@ -68,7 +68,7 @@ public class UserDAO {
         return usr;
     }
 
-    public static void updateUser(String id, User usr) throws SQLException, ClassNotFoundException {
+    public static void updateUser(int id, User usr) throws SQLException, ClassNotFoundException {
         String updateStmt = "UPDATE user SET";
         updateStmt = !usr.getEmail().equals("") ? 
                 updateStmt.concat(" email='" + usr.getEmail() + "',") 
@@ -90,7 +90,7 @@ public class UserDAO {
         }
     }
 
-    public static void deleteEmpWithId(String id) throws SQLException, ClassNotFoundException {
+    public static void deleteEmpWithId(int id) throws SQLException, ClassNotFoundException {
         String updateStmt = "DELETE FROM user WHERE id='" + id + "'";
         try {
             DBUtil.getInstance().dbExecuteUpdate(updateStmt);

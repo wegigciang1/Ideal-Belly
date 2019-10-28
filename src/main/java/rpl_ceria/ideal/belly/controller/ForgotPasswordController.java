@@ -43,40 +43,37 @@ public class ForgotPasswordController implements Initializable {
      */
     @FXML
     private TextField email;
-    @FXML
-    private AnchorPane anchor_lvl1;
-    @FXML
-    private StackPane stackPane_lvl2;
-    @FXML
-    private AnchorPane anchor_lvl3;
-    @FXML
-    private AnchorPane anchor_lvl4;
-    @FXML
-    private ImageView Logo_IdealBelly;
-    @FXML
-    private Label judul_label;
+    
     @FXML
     private PasswordField password_field1;
-    @FXML
-    private Button button_submit;
-    @FXML
-    private Label subPassJudul1;
+    
     @FXML
     private PasswordField password_field2;
-    @FXML
-    private Label subPassJudul2;
     
+    private static String emailNow;
+    
+    public static String getEmailNow() {
+        return emailNow;
+    }
+
+    public static void setEmailNow(String emailNow) {
+        ForgotPasswordController.emailNow = emailNow;
+    }
+    
+    @FXML
     private void handleResetPasswordButtonAction(ActionEvent event) throws IOException, SQLException, ClassNotFoundException, ParseException {
         String emailUser = email.getText();
         
         User user = UserDAO.searchUserByEmail(emailUser);
         
         if(user != null) {
+//            this.emailNow = email.getText();
+            ForgotPasswordController.setEmailNow(email.getText());
             System.out.println("Email valid");
             
-            Parent root= FXMLLoader.load(getClass().getResource("/fxml/Home.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/PasswordRecovery.fxml"));
             Scene scene = new Scene(root);
-            scene.getStylesheets().add("/styles/Styles.css");
+            scene.getStylesheets().add("/styles/PasswordRecoveryStyles.css");
             Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
             
             window.setScene(scene);
@@ -86,6 +83,30 @@ public class ForgotPasswordController implements Initializable {
               JOptionPane.showMessageDialog(null, "Email tidak terdaftar");
         }
         
+    }
+    
+    @FXML
+    private void handleChangePasswordButtonAction(ActionEvent event) throws IOException, SQLException, ClassNotFoundException, ParseException {
+        String newPassword = password_field1.getText();
+        String confirmPassword = password_field2.getText();
+        
+        User userNow = UserDAO.searchUserByEmail(ForgotPasswordController.getEmailNow());
+        
+        if(newPassword.equals(confirmPassword)){
+            userNow.setPassword(newPassword);
+            UserDAO.updateUser(userNow.getId(), userNow);
+            
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add("/styles/LoginStyles.css");
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            window.setScene(scene);
+            window.show();
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Password tidak sama");
+        }
     }
     
     @Override

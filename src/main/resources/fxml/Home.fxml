@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchor_lvl1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="anchor_lvl1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rpl_ceria.ideal.belly.controller.HomeController">
    <children>
       <AnchorPane fx:id="anhcor_lvl2" prefHeight="400.0" prefWidth="600.0">
          <children>
@@ -22,8 +22,8 @@
                           <items>
                               <MenuItem fx:id="home_subMenu" mnemonicParsing="false" text="Home" />
                               <MenuItem mnemonicParsing="false" text="Menu2" />
-                            <MenuItem fx:id="editProfile_subMenu" mnemonicParsing="false" onAction="#editProfileUser" text="Edit Profile" />
-                            <MenuItem fx:id="keluar_subMenu" mnemonicParsing="false" onAction="#signOutProgram" text="Keluar" />
+                            <MenuItem fx:id="editProfile_subMenu" mnemonicParsing="false" text="Edit Profile" />
+                            <MenuItem fx:id="keluar_subMenu" mnemonicParsing="false" text="Keluar" />
                           </items>
                         </MenuButton>
                         <Label fx:id="selamatDatang_label" layoutX="403.0" layoutY="17.0" text="Selamat Datang, " />
