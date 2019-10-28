@@ -4,7 +4,7 @@ import rpl_ceria.ideal.belly.model.User;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
 /**
  *
@@ -13,14 +13,14 @@ import java.text.SimpleDateFormat;
 public class UserDAO {
     
     public static void addUser(User usr) throws SQLException, ClassNotFoundException{
-        String addStmt = "INSERT INTO user VALUES('";
+        String addStmt = "INSERT INTO user VALUES(null, '";
         addStmt = addStmt.concat(usr.getEmail() + "','");
         addStmt = addStmt.concat(usr.getPassword() + "','");
-        addStmt = addStmt.concat(usr.getNama() + "',");
-        addStmt = addStmt.concat(usr.getTanggal_lahir() + ",");
+        addStmt = addStmt.concat(usr.getNama() + "','");
+        addStmt = addStmt.concat(usr.getTanggal_lahir().toString() + "',");
         addStmt = addStmt.concat(usr.getTinggi_badan() + ")");
         try{
-            DBUtil.getInstance().dbExecuteQuery(addStmt);
+            DBUtil.getInstance().dbExecuteQueryInsert(addStmt);
         }catch (SQLException e){
             System.out.println("Insert Failed " + e);
             throw e;
@@ -30,7 +30,18 @@ public class UserDAO {
     public static User searchUser(String email, String password) throws SQLException, ClassNotFoundException, ParseException {
         String selectStmt = "SELECT * FROM user WHERE email='" + email 
                 + "' AND password='" + password + "'";
-        System.out.println("Email : " + email + ",  Password : " + password);
+        try {
+            ResultSet rsUsr = DBUtil.getInstance().dbExecuteQuery(selectStmt);
+            User user = getUserFromResultSet(rsUsr);
+            return user;
+        } catch (SQLException e) {
+            System.out.println("Sedang mencari user dengan email: " + email + ", error terjadi: " + e);
+            throw e;
+        }
+    }
+    
+    public static User searchUserByEmail(String email) throws SQLException, ClassNotFoundException, ParseException {
+        String selectStmt = "SELECT * FROM user WHERE email='" + email + "'";
         try {
             ResultSet rsUsr = DBUtil.getInstance().dbExecuteQuery(selectStmt);
             User user = getUserFromResultSet(rsUsr);
@@ -44,13 +55,13 @@ public class UserDAO {
     private static User getUserFromResultSet(ResultSet rs) throws SQLException, ParseException {
         User usr = null;
         if (rs.next()) {
+            System.out.println("Enter");
             usr = new User();
             usr.setId(rs.getInt("id"));
             usr.setEmail(rs.getString("email"));
             usr.setPassword(rs.getString("password"));
             usr.setNama(rs.getString("nama"));
-            SimpleDateFormat formatter = new SimpleDateFormat("dd-mm-yyyy");
-            usr.setTanggal_lahir(formatter.parse(rs.getString("tanggal_lahir")));
+            usr.setTanggal_lahir(LocalDate.parse(rs.getString("tanggal_lahir")));
 //            usr.setTanggal_lahir(rs.getDate("tanggal_lahir"));
             usr.setTinggi_badan(rs.getDouble("tinggi_badan"));
         }

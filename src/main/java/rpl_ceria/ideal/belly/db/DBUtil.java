@@ -34,8 +34,6 @@ public class DBUtil {
 
     private String getJDBC() {
         String urlDB = getUrlDB();
-//        String urlDB = "C:/Users/LENOVO/Documents/tutorialA.db";
-        System.out.println("URL JDBC : " + urlDB);
         String JDBC_DRIVER = null;
         if (urlDB != null) {
             JDBC_DRIVER = "jdbc:sqlite:" + urlDB;
@@ -74,6 +72,25 @@ public class DBUtil {
         }
     }
 
+    public void dbExecuteQueryInsert(String addStmt) throws SQLException, ClassNotFoundException {
+        Statement stmt = null;
+        
+        try{
+            dbConnect();
+            stmt = conn.createStatement();
+            stmt.execute(addStmt);
+        } catch(SQLException e){
+            System.out.println("Error in " + e);
+        } finally {
+            if (stmt != null) {
+                //Close Statement
+                stmt.close();
+            }
+            //Close connection
+            dbDisconnect();
+        }
+    }
+    
     public ResultSet dbExecuteQuery(String queryStmt) throws SQLException,
             ClassNotFoundException {
         Statement stmt = null;
