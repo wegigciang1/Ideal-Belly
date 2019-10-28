@@ -15,7 +15,7 @@
    <children>
       <StackPane prefHeight="400.0" prefWidth="600.0">
          <children>
-            <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: yellow;">
+            <AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="anchor1">
                <children>
                   <AnchorPane layoutX="124.0" layoutY="29.0" prefHeight="343.0" prefWidth="353.0" style="-fx-background-color: white; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-radius: 4; -fx-border-radius: 4; -fx-padding: 8;">
                      <children>
@@ -35,7 +35,7 @@
                         <PasswordField layoutX="148.0" layoutY="180.0" prefHeight="26.0" prefWidth="159.0" promptText="****" styleClass="input" />
                         <Label layoutX="33.0" layoutY="225.0" text="Tanggal Lahir" />
                         <TextField layoutX="147.0" layoutY="140.0" prefHeight="26.0" prefWidth="159.0" promptText="ciang@example.com" styleClass="input" />
-                        <Button layoutX="221.0" layoutY="305.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="86.0" style="-fx-text-fill: white;" text="Sign Up" textAlignment="RIGHT" />
+                        <Button layoutX="221.0" layoutY="305.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="86.0" style="-fx-text-fill: white; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5);" text="Sign Up" textAlignment="RIGHT" />
                         <TextField layoutX="147.0" layoutY="100.0" prefHeight="26.0" prefWidth="159.0" promptText="Nama" styleClass="input" />
                         <Label layoutX="33.0" layoutY="265.0" text="Tinggi Badan" />
                         <DatePicker layoutX="148.0" layoutY="220.0" prefHeight="26.0" prefWidth="159.0" promptText="06/07/01" styleClass="input" />
