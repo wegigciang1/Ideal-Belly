@@ -40,14 +40,11 @@ public class LoginController implements Initializable {
         User user = UserDAO.searchUser(emailUser, passwordUser);
         
         if(user != null) {
-            System.out.println("User get");
-            System.out.println(user.getNama());
-        
             System.out.println("Login Berhasil");
             
             Parent root= FXMLLoader.load(getClass().getResource("/fxml/Home.fxml"));
             Scene scene = new Scene(root);
-            scene.getStylesheets().add("/styles/LoginStyles.css");
+            scene.getStylesheets().add("/styles/Styles.css");
             Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
             
             window.setScene(scene);

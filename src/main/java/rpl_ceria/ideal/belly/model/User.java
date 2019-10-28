@@ -5,7 +5,7 @@
  */
 package rpl_ceria.ideal.belly.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -75,14 +75,14 @@ public class User {
     /**
      * @return the tanggal_lahir
      */
-    public Date getTanggal_lahir() {
+    public LocalDate getTanggal_lahir() {
         return tanggal_lahir;
     }
 
     /**
      * @param tanggal_lahir the tanggal_lahir to set
      */
-    public void setTanggal_lahir(Date tanggal_lahir) {
+    public void setTanggal_lahir(LocalDate tanggal_lahir) {
         this.tanggal_lahir = tanggal_lahir;
     }
 
@@ -103,6 +103,6 @@ public class User {
     private SimpleStringProperty nama = new SimpleStringProperty();
     private SimpleStringProperty email = new SimpleStringProperty();
     private SimpleStringProperty password = new SimpleStringProperty();
-    private Date tanggal_lahir;
+    private LocalDate tanggal_lahir;
     private SimpleDoubleProperty tinggi_badan = new SimpleDoubleProperty();
 }

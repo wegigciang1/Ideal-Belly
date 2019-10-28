@@ -29,16 +29,16 @@
                               <Font size="17.0" />
                            </font></Label>
                         <Label layoutX="33.0" layoutY="145.0" text="Email" />
-                        <TextField layoutX="147.0" layoutY="260.0" prefHeight="26.0" prefWidth="159.0" promptText="150" styleClass="input" />
+                        <TextField fx:id="tinggi_badan" layoutX="147.0" layoutY="260.0" prefHeight="26.0" prefWidth="159.0" promptText="150" styleClass="input" />
                         <Label layoutX="33.0" layoutY="105.0" text="Nama" />
                         <Label layoutX="33.0" layoutY="185.0" text="Password" />
-                        <PasswordField layoutX="148.0" layoutY="180.0" prefHeight="26.0" prefWidth="159.0" promptText="****" styleClass="input" />
+                        <PasswordField fx:id="password" layoutX="148.0" layoutY="180.0" prefHeight="26.0" prefWidth="159.0" promptText="****" styleClass="input" />
                         <Label layoutX="33.0" layoutY="225.0" text="Tanggal Lahir" />
-                        <TextField layoutX="147.0" layoutY="140.0" prefHeight="26.0" prefWidth="159.0" promptText="ciang@example.com" styleClass="input" />
-                        <Button layoutX="221.0" layoutY="305.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="86.0" style="-fx-text-fill: white; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5);" text="Sign Up" textAlignment="RIGHT" />
-                        <TextField layoutX="147.0" layoutY="100.0" prefHeight="26.0" prefWidth="159.0" promptText="Nama" styleClass="input" />
+                        <TextField fx:id="email" layoutX="147.0" layoutY="140.0" prefHeight="26.0" prefWidth="159.0" promptText="ciang@example.com" styleClass="input" />
+                        <Button layoutX="221.0" layoutY="305.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="86.0" style="-fx-text-fill: white; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5);" onAction="#handleSignUpButtonAction" text="Sign Up" textAlignment="RIGHT" />
+                        <TextField fx:id="nama" layoutX="147.0" layoutY="100.0" prefHeight="26.0" prefWidth="159.0" promptText="Nama" styleClass="input" />
                         <Label layoutX="33.0" layoutY="265.0" text="Tinggi Badan" />
-                        <DatePicker layoutX="148.0" layoutY="220.0" prefHeight="26.0" prefWidth="159.0" promptText="06/07/01" styleClass="input" />
+                        <DatePicker fx:id="tanggal_lahir" layoutX="148.0" layoutY="220.0" prefHeight="26.0" prefWidth="159.0" promptText="06/07/01" styleClass="input" />
                      </children>
                   </AnchorPane>
                </children>
