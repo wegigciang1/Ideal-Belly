@@ -10,6 +10,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -90,22 +91,33 @@ public class ForgotPasswordController implements Initializable {
         String newPassword = password_field1.getText();
         String confirmPassword = password_field2.getText();
         
-        User userNow = UserDAO.searchUserByEmail(ForgotPasswordController.getEmailNow());
-        
-        if(newPassword.equals(confirmPassword)){
-            userNow.setPassword(newPassword);
-            UserDAO.updateUser(userNow.getId(), userNow);
-            
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
-            Scene scene = new Scene(root);
-            scene.getStylesheets().add("/styles/LoginStyles.css");
-            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        try {
+            if(Pattern.matches("[a-zA-Z]+", password_field1.getText()) || Pattern.matches("[0-9]+", password_field1.getText()) 
+                    || password_field1.getText().length() < 8){
+                JOptionPane.showMessageDialog(null, "Password harus terdiri dari huruf dan angka, minimal 8 karakter");
+                throw new IOException();
+            }
 
-            window.setScene(scene);
-            window.show();
+            User userNow = UserDAO.searchUserByEmail(ForgotPasswordController.getEmailNow());
+
+            if(newPassword.equals(confirmPassword)){
+                userNow.setPassword(newPassword);
+                UserDAO.updateUser(userNow.getId(), userNow);
+
+                Parent root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
+                Scene scene = new Scene(root);
+                scene.getStylesheets().add("/styles/LoginStyles.css");
+                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+                window.setScene(scene);
+                window.show();
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Password tidak sama");
+            }
         }
-        else {
-            JOptionPane.showMessageDialog(null, "Password tidak sama");
+        catch(Exception e){
+            System.out.println("Error: " + e);
         }
     }
     

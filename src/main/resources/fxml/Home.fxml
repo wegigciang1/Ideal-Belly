@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
@@ -10,7 +15,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchor_lvl1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rpl_ceria.ideal.belly.controller.HomeController">
+<AnchorPane fx:id="anchor_lvl1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rpl_ceria.ideal.belly.controller.HomeController">
    <children>
       <AnchorPane fx:id="anhcor_lvl2" prefHeight="400.0" prefWidth="600.0">
          <children>
@@ -23,11 +28,10 @@
                               <MenuItem fx:id="home_subMenu" mnemonicParsing="false" text="Home" />
                               <MenuItem mnemonicParsing="false" text="Menu2" />
                             <MenuItem fx:id="editProfile_subMenu" mnemonicParsing="false" text="Edit Profile" />
-                            <MenuItem fx:id="keluar_subMenu" mnemonicParsing="false" text="Keluar" />
+                            <!--<MenuItem fx:id="keluar_subMenu" mnemonicParsing="false" text="Keluar" />-->
                           </items>
                         </MenuButton>
-                        <Label fx:id="selamatDatang_label" layoutX="403.0" layoutY="17.0" text="Selamat Datang, " />
-                        <Label fx:id="namaUser_label" layoutX="504.0" layoutY="18.0" text="Label" />
+                        <Hyperlink layoutX="532.0" layoutY="14.0" onAction="#handleLogOutLinkAction" text="Logout" />
                      </children>
                   </AnchorPane>
                   <AnchorPane fx:id="bilah_kiri" layoutX="6.0" layoutY="6.0" prefHeight="335.0" prefWidth="291.0" style="-fx-background-color: white; -fx-border-radius: 4; -fx-background-radius: 4; -fx-padding: 8;">
@@ -35,6 +39,10 @@
                         <Label layoutX="25.0" layoutY="166.0" text="Berat Awal" />
                         <Label layoutX="25.0" layoutY="196.0" text="Berat Saat Ini" />
                         <Label layoutX="25.0" layoutY="228.0" text="Berat Sasaran" />
+                        <Label fx:id="selamatDatang_label" layoutX="26.0" layoutY="48.0" prefHeight="71.0" prefWidth="176.0" text="Selamat Datang">
+                           <font>
+                              <Font size="24.0" />
+                           </font></Label>
                      </children>
                   </AnchorPane>
                   <AnchorPane fx:id="bilah_kanan" layoutX="303.0" layoutY="6.0" prefHeight="335.0" prefWidth="291.0" style="-fx-background-color: white; -fx-border-radius: 4; -fx-background-radius: 4; -fx-padding: 8;">

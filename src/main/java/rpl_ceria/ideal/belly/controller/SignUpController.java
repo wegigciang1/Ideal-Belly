@@ -13,6 +13,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.ZoneId;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -58,12 +59,53 @@ public class SignUpController implements Initializable {
     private void handleSignUpButtonAction(ActionEvent event) throws IOException, SQLException, ClassNotFoundException, ParseException {
         
         try{
-            if(email.getText().isEmpty() || password.getText().isEmpty() || nama.getText().isEmpty() || tinggi_badan.getText().isEmpty()){
+            if(email.getText().isEmpty() || password.getText().isEmpty() || nama.getText().isEmpty() || tanggal_lahir.getValue() == null || tinggi_badan.getText().isEmpty()){
                 JOptionPane.showMessageDialog(null, "Data harus diisi semua");
                 throw new IOException();
             }
             
-                
+            String popupmessage = "";
+            boolean flag = false;
+            if(!Pattern.matches("[a-zA-Z]+", nama.getText())){
+                popupmessage = "Nama harus huruf";
+                flag = true;
+            }
+            if(!email.getText().contains("@") || !email.getText().contains(".")){
+                if(flag){
+                    popupmessage = popupmessage + "\nEmail tidak valid";
+                }
+                else{
+                    popupmessage = "Email tidak valid";
+                }
+                flag = true;
+            }
+            if(Pattern.matches("[a-zA-Z]+", password.getText()) || Pattern.matches("[0-9]+", password.getText()) 
+                    || password.getText().length() < 8){
+                if(flag){
+                    popupmessage = popupmessage + "\nPassword harus angka & huruf min 8 karakter";
+                }
+                else{
+                    popupmessage = "Password harus angka & huruf min 8 karakter";
+                }
+                flag = true;
+            }
+            if(!Pattern.matches("[0-9]+", tinggi_badan.getText())){
+                if(flag){
+                    popupmessage = popupmessage + "\nTinggi badan harus angka";
+                }
+                else{
+                    popupmessage = "Tinggi badan harus angka";
+                }
+                flag = true;
+            }
+            else{
+                flag = false;
+            }
+            if(popupmessage != ""){
+                JOptionPane.showMessageDialog(null, popupmessage);
+                throw new IOException();
+            }
+            
             User newuser = new User();
             newuser.setEmail(email.getText());
             newuser.setPassword(password.getText());
@@ -75,8 +117,6 @@ public class SignUpController implements Initializable {
                 UserDAO.addUser(newuser);
                 JOptionPane.showMessageDialog(null, "Akun berhasil ditambahkan");
                 System.out.println("Sign Up Done");
-                
-                JOptionPane.showMessageDialog(null, "Password berhasil diganti");
                 
                 Parent root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
                 Scene scene = new Scene(root);
