@@ -46,6 +46,19 @@ public class HomeController implements Initializable {
         window.show();
     }
     
+    @FXML
+    private void handleEditProfileLinkAction(ActionEvent event) throws IOException {
+        System.out.println("Request Edit Profile");
+        
+        Parent root= FXMLLoader.load(getClass().getResource("/fxml/EditProfile.fxml"));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add("/styles/Styles.css");
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+            
+        window.setScene(scene);
+        window.show();
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

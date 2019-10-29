@@ -23,15 +23,9 @@
                <children>
                   <AnchorPane fx:id="bilah_atas" layoutY="-53.0" prefHeight="51.0" prefWidth="600.0" style="-fx-background-color: white;">
                      <children>
-                        <MenuButton fx:id="menu_dropdown" mnemonicParsing="false" prefHeight="51.0" prefWidth="116.0" text="Menu">
-                          <items>
-                              <MenuItem fx:id="home_subMenu" mnemonicParsing="false" text="Home" />
-                              <MenuItem mnemonicParsing="false" text="Menu2" />
-                            <MenuItem fx:id="editProfile_subMenu" mnemonicParsing="false" text="Edit Profile" />
-                            <!--<MenuItem fx:id="keluar_subMenu" mnemonicParsing="false" text="Keluar" />-->
-                          </items>
-                        </MenuButton>
                         <Hyperlink layoutX="532.0" layoutY="14.0" onAction="#handleLogOutLinkAction" text="Logout" />
+                        <Hyperlink layoutX="453.0" layoutY="14.0" onAction="#handleEditProfileLinkAction" text="Edit Profile" />
+                        <Hyperlink layoutX="396.0" layoutY="14.0" text="Home" />
                      </children>
                   </AnchorPane>
                   <AnchorPane fx:id="bilah_kiri" layoutX="6.0" layoutY="6.0" prefHeight="335.0" prefWidth="291.0" style="-fx-background-color: white; -fx-border-radius: 4; -fx-background-radius: 4; -fx-padding: 8;">

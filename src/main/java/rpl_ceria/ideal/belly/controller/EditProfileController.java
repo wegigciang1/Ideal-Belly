@@ -7,8 +7,6 @@ package rpl_ceria.ideal.belly.controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 import javafx.event.ActionEvent;
@@ -18,7 +16,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
@@ -30,13 +27,14 @@ import rpl_ceria.ideal.belly.model.User;
  *
  * @author nathania
  */
-public class SignUpController implements Initializable {
-    
+public class EditProfileController implements Initializable {
+
     /**
      * Initializes the controller class.
      * @param url
      * @param rb
      */
+    
     @FXML
     private TextField email;
     
@@ -44,19 +42,31 @@ public class SignUpController implements Initializable {
     private TextField password;
     
     @FXML
+    private TextField retypePass;
+    
+    @FXML
     private TextField nama;
     
     @FXML
-    private DatePicker tanggal_lahir;
+    private TextField tinggi_badan;
     
     @FXML
-    private TextField tinggi_badan;
-                  
-    @FXML
-    private void handleSignUpButtonAction(ActionEvent event) throws IOException, SQLException, ClassNotFoundException, ParseException {
+    private void handleLogOutLinkAction(ActionEvent event) throws IOException {
+        System.out.println("Request Log Out");
         
+        Parent root= FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add("/styles/LoginStyles.css");
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+            
+        window.setScene(scene);
+        window.show();
+    }
+    
+    @FXML
+    private void handleEditProfileButtonAction(ActionEvent event) throws IOException {
         try{
-            if(email.getText().isEmpty() || password.getText().isEmpty() || nama.getText().isEmpty() || tanggal_lahir.getValue() == null || tinggi_badan.getText().isEmpty()){
+            if(email.getText().isEmpty() || password.getText().isEmpty() || nama.getText().isEmpty() || tinggi_badan.getText().isEmpty()){
                 JOptionPane.showMessageDialog(null, "Data harus diisi semua");
                 throw new IOException();
             }
@@ -95,40 +105,49 @@ public class SignUpController implements Initializable {
                 }
                 flag = true;
             }
-            else{
-                flag = false;
-            }
+            
             if(popupmessage != ""){
                 JOptionPane.showMessageDialog(null, popupmessage);
                 throw new IOException();
             }
-            
-            User newuser = new User();
-            newuser.setEmail(email.getText());
-            newuser.setPassword(password.getText());
-            newuser.setNama(nama.getText());
-            newuser.setTanggal_lahir(tanggal_lahir.getValue());
-            newuser.setTinggi_badan(Double.parseDouble(tinggi_badan.getText()));
-            User user = UserDAO.searchUserByEmail(newuser.getEmail());
-            if (user == null) {
-                UserDAO.addUser(newuser);
-                JOptionPane.showMessageDialog(null, "Akun berhasil ditambahkan");
-                System.out.println("Sign Up Done");
+
+            User userUpdate = UserDAO.searchUserByEmail(email.getText()); 
+            userUpdate.setEmail(email.getText());
+            userUpdate.setPassword(password.getText());
+            userUpdate.setNama(nama.getText());
+            userUpdate.setTinggi_badan(Double.parseDouble(tinggi_badan.getText()));
+            if (userUpdate != null) {
+                UserDAO.updateUser(userUpdate.getId(), userUpdate);
+                JOptionPane.showMessageDialog(null, "Akun berhasil diedit");
+                System.out.println("Edit Profile Done");
                 
-                Parent root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("/fxml/Home.fxml"));
                 Scene scene = new Scene(root);
-                scene.getStylesheets().add("/styles/LoginStyles.css");
+                scene.getStylesheets().add("/styles/Styles.css");
                 Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
                 window.setScene(scene);
                 window.show();
             } else {
-                JOptionPane.showMessageDialog(null, "Maaf, Email sudah terdaftar");
+                JOptionPane.showMessageDialog(null, "Maaf, edit profile gagal");
             }
         }
         catch(Exception e){
             System.out.println("Error: " + e);
         }
+    }
+    
+    @FXML
+    private void handleHomeLinkAction(ActionEvent event) throws IOException {
+        System.out.println("Request Home");
+        
+        Parent root= FXMLLoader.load(getClass().getResource("/fxml/Home.fxml"));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add("/styles/Styles.css");
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+            
+        window.setScene(scene);
+        window.show();
     }
     
     @Override
