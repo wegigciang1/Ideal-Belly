@@ -18,10 +18,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javax.swing.JOptionPane;
 import rpl_ceria.ideal.belly.db.UserDAO;
 import rpl_ceria.ideal.belly.model.User;
 
@@ -57,7 +57,17 @@ public class SignUpController implements Initializable {
         
         try{
             if(email.getText().isEmpty() || password.getText().isEmpty() || nama.getText().isEmpty() || tanggal_lahir.getValue() == null || tinggi_badan.getText().isEmpty()){
-                JOptionPane.showMessageDialog(null, "Data harus diisi semua");
+               
+//                    Alert alert = new Alert(Alert.AlertType.ERROR);
+//                alert.setTitle("Invalid Registration");
+//                alert.setHeaderText("Wajib Mengisi Semua Data");
+//                alert.setContentText("Data Tidak Boleh Kosong");
+                
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Invalid Registration");
+                alert.setHeaderText("Wajib Mengisi Semua Data");
+                alert.setContentText("Data Tidak Boleh Kosong");
+                alert.showAndWait();
                 throw new IOException();
             }
             
@@ -99,7 +109,11 @@ public class SignUpController implements Initializable {
                 flag = false;
             }
             if(popupmessage != ""){
-                JOptionPane.showMessageDialog(null, popupmessage);
+                  Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Invalid Input");
+                alert.setHeaderText("Pengisian Tidak Benar");
+                alert.setContentText(popupmessage);
+                alert.showAndWait();
                 throw new IOException();
             }
             
@@ -112,7 +126,12 @@ public class SignUpController implements Initializable {
             User user = UserDAO.searchUserByEmail(newuser.getEmail());
             if (user == null) {
                 UserDAO.addUser(newuser);
-                JOptionPane.showMessageDialog(null, "Akun berhasil ditambahkan");
+                
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Registration Success");
+                alert.setHeaderText("Daftar Berhasil");
+                alert.setContentText("Akun Anda Berhasil Dibuat");
+                alert.showAndWait();
                 System.out.println("Sign Up Done");
                 
                 Parent root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
@@ -123,7 +142,12 @@ public class SignUpController implements Initializable {
                 window.setScene(scene);
                 window.show();
             } else {
-                JOptionPane.showMessageDialog(null, "Maaf, Email sudah terdaftar");
+                
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Registration");
+                alert.setHeaderText("Pendaftaran Gagal");
+                alert.setContentText("Email Sudah Terdaftar");
+                alert.showAndWait();
             }
         }
         catch(Exception e){

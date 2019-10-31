@@ -18,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -26,7 +27,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import javax.swing.JOptionPane;
 import rpl_ceria.ideal.belly.db.UserDAO;
 import rpl_ceria.ideal.belly.model.User;
 
@@ -81,7 +81,12 @@ public class ForgotPasswordController implements Initializable {
             window.show();
             
         } else {
-              JOptionPane.showMessageDialog(null, "Email tidak terdaftar");
+            
+              Alert alert = new Alert(Alert.AlertType.ERROR);
+              alert.setTitle("Email Not Found");
+              alert.setHeaderText("Email tidak terdaftar");
+              alert.setContentText("Check simbol dan kelengkapan email");
+              alert.showAndWait();
         }
         
     }
@@ -90,11 +95,14 @@ public class ForgotPasswordController implements Initializable {
     private void handleChangePasswordButtonAction(ActionEvent event) throws IOException, SQLException, ClassNotFoundException, ParseException {
         String newPassword = password_field1.getText();
         String confirmPassword = password_field2.getText();
-        
+        Alert alert = new Alert(Alert.AlertType.ERROR);
         try {
             if(Pattern.matches("[a-zA-Z]+", password_field1.getText()) || Pattern.matches("[0-9]+", password_field1.getText()) 
                     || password_field1.getText().length() < 8){
-                JOptionPane.showMessageDialog(null, "Password harus terdiri dari huruf dan angka, minimal 8 karakter");
+                alert.setTitle("Password Error");
+                alert.setHeaderText("Bad Password");
+                alert.setContentText("Password harus terdiri dari huruf dan angka, minimal 8 karakter");
+                alert.showAndWait();
                 throw new IOException();
             }
 
@@ -113,7 +121,10 @@ public class ForgotPasswordController implements Initializable {
                 window.show();
             }
             else {
-                JOptionPane.showMessageDialog(null, "Password tidak sama");
+                alert.setTitle("Password Error");
+                alert.setHeaderText("Wrong Password");
+                alert.setContentText("Password tidak sama");
+                alert.showAndWait();
             }
         }
         catch(Exception e){

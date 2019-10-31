@@ -16,9 +16,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javax.swing.JOptionPane;
 import rpl_ceria.ideal.belly.db.UserDAO;
 import rpl_ceria.ideal.belly.model.User;
 
@@ -31,96 +31,108 @@ public class EditProfileController implements Initializable {
 
     /**
      * Initializes the controller class.
+     *
      * @param url
      * @param rb
      */
-    
     @FXML
     private TextField email;
-    
+
     @FXML
     private TextField password;
-    
+
     @FXML
     private TextField retypePass;
-    
+
     @FXML
     private TextField nama;
-    
+
     @FXML
     private TextField tinggi_badan;
-    
+
     @FXML
     private void handleLogOutLinkAction(ActionEvent event) throws IOException {
         System.out.println("Request Log Out");
-        
-        Parent root= FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
+
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/styles/LoginStyles.css");
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-            
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
         window.setScene(scene);
         window.show();
     }
-    
+
     @FXML
     private void handleEditProfileButtonAction(ActionEvent event) throws IOException {
-        try{
-            if(email.getText().isEmpty() || password.getText().isEmpty() || nama.getText().isEmpty() || tinggi_badan.getText().isEmpty()){
-                JOptionPane.showMessageDialog(null, "Data harus diisi semua");
+
+        try {
+            if (email.getText().isEmpty() || password.getText().isEmpty() || nama.getText().isEmpty() || tinggi_badan.getText().isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Invalid Input");
+                alert.setHeaderText("Data masih kosong");
+                alert.setContentText("Data harus diisi semua");
+                alert.showAndWait();
                 throw new IOException();
             }
-            
+
             String popupmessage = "";
             boolean flag = false;
-            if(!Pattern.matches("[a-zA-Z]+", nama.getText())){
+            if (!Pattern.matches("[a-zA-Z]+", nama.getText())) {
                 popupmessage = "Nama harus huruf";
                 flag = true;
             }
-            if(!email.getText().contains("@") || !email.getText().contains(".")){
-                if(flag){
+            if (!email.getText().contains("@") || !email.getText().contains(".")) {
+                if (flag) {
                     popupmessage = popupmessage + "\nEmail tidak valid";
-                }
-                else{
+                } else {
                     popupmessage = "Email tidak valid";
                 }
                 flag = true;
             }
-            if(Pattern.matches("[a-zA-Z]+", password.getText()) || Pattern.matches("[0-9]+", password.getText()) 
-                    || password.getText().length() < 8){
-                if(flag){
+            if (Pattern.matches("[a-zA-Z]+", password.getText()) || Pattern.matches("[0-9]+", password.getText())
+                    || password.getText().length() < 8) {
+                if (flag) {
                     popupmessage = popupmessage + "\nPassword harus angka & huruf min 8 karakter";
-                }
-                else{
+                } else {
                     popupmessage = "Password harus angka & huruf min 8 karakter";
                 }
                 flag = true;
             }
-            if(!Pattern.matches("[0-9]+", tinggi_badan.getText())){
-                if(flag){
+            if (!Pattern.matches("[0-9]+", tinggi_badan.getText())) {
+                if (flag) {
                     popupmessage = popupmessage + "\nTinggi badan harus angka";
-                }
-                else{
+                } else {
                     popupmessage = "Tinggi badan harus angka";
                 }
                 flag = true;
             }
-            
-            if(popupmessage != ""){
-                JOptionPane.showMessageDialog(null, popupmessage);
+
+            if (popupmessage != "") {
+
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Invalid Input");
+                alert.setHeaderText("Pengisian Tidak Benar");
+                alert.setContentText(popupmessage);
+                alert.showAndWait();
                 throw new IOException();
             }
 
-            User userUpdate = UserDAO.searchUserByEmail(email.getText()); 
+            User userUpdate = UserDAO.searchUserByEmail(email.getText());
             userUpdate.setEmail(email.getText());
             userUpdate.setPassword(password.getText());
             userUpdate.setNama(nama.getText());
             userUpdate.setTinggi_badan(Double.parseDouble(tinggi_badan.getText()));
             if (userUpdate != null) {
                 UserDAO.updateUser(userUpdate.getId(), userUpdate);
-                JOptionPane.showMessageDialog(null, "Akun berhasil diedit");
-                System.out.println("Edit Profile Done");
-                
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Input Success");
+                alert.setHeaderText("Data Changes");
+                alert.setContentText("Data Berhasil Diperbarui");
+                alert.showAndWait();
+                System.out.println("Akun Berhasil Diperbarui");
+
                 Parent root = FXMLLoader.load(getClass().getResource("/fxml/Home.fxml"));
                 Scene scene = new Scene(root);
                 scene.getStylesheets().add("/styles/Styles.css");
@@ -129,30 +141,34 @@ public class EditProfileController implements Initializable {
                 window.setScene(scene);
                 window.show();
             } else {
-                JOptionPane.showMessageDialog(null, "Maaf, edit profile gagal");
+
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Edit Gagal");
+                alert.setHeaderText("Error");
+                alert.setContentText("Maaf, Edit Profile Gagal");
+                alert.showAndWait();
             }
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             System.out.println("Error: " + e);
         }
     }
-    
+
     @FXML
     private void handleHomeLinkAction(ActionEvent event) throws IOException {
         System.out.println("Request Home");
-        
-        Parent root= FXMLLoader.load(getClass().getResource("/fxml/Home.fxml"));
+
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Home.fxml"));
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/styles/Styles.css");
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-            
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
         window.setScene(scene);
         window.show();
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
 }

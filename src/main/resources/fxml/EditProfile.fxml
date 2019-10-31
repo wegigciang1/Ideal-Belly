@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchor_lvl1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rpl_ceria.ideal.belly.controller.EditProfileController">
+<AnchorPane fx:id="anchor_lvl1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rpl_ceria.ideal.belly.controller.EditProfileController">
    <children>
       <AnchorPane fx:id="anhcor_lvl2" prefHeight="400.0" prefWidth="600.0">
          <children>
@@ -23,12 +18,11 @@
                      <children>
                         <Hyperlink layoutX="532.0" layoutY="14.0" onAction="#handleLogOutLinkAction" text="Logout" />
                         <Hyperlink layoutX="453.0" layoutY="14.0" text="Edit Profile" />
-                        <Hyperlink layoutX="396.0" layoutY="14.0" onAction="#handleHomeLinkAction"  text="Home" />
+                        <Hyperlink layoutX="396.0" layoutY="14.0" onAction="#handleHomeLinkAction" text="Home" />
                      </children>
             </AnchorPane>
                   <AnchorPane fx:id="bilah_kiri" layoutX="6.0" layoutY="6.0" prefHeight="335.0" prefWidth="150.0" style="-fx-background-color: white; -fx-border-radius: 4; -fx-background-radius: 4; -fx-padding: 8;">
                      <children>
-                        <Label fx:id="username_label" layoutX="42.0" layoutY="54.0" text="Username" />
                         <Label fx:id="nama_label" layoutX="42.0" layoutY="121.0" text="Nama" />
                         <Label fx:id="password_label" layoutX="42.0" layoutY="152.0" text="Password" />
                         <Label fx:id="retypePass_label" layoutX="42.0" layoutY="185.0" text="Retype Pass" />
