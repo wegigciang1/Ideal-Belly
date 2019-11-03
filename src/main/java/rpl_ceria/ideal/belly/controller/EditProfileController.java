@@ -99,7 +99,7 @@ public class EditProfileController implements Initializable {
                 }
                 flag = true;
             }
-            if (!Pattern.matches("[0-9]+", tinggi_badan.getText())) {
+            if (!Pattern.matches("[0-9]+[\\.0-9]+", tinggi_badan.getText())) {
                 if (flag) {
                     popupmessage = popupmessage + "\nTinggi badan harus angka";
                 } else {

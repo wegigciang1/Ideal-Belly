@@ -96,7 +96,7 @@ public class SignUpController implements Initializable {
                 }
                 flag = true;
             }
-            if(!Pattern.matches("[0-9]+", tinggi_badan.getText())){
+            if(!Pattern.matches("[0-9]+[\\.0-9]+", tinggi_badan.getText())){
                 if(flag){
                     popupmessage = popupmessage + "\nTinggi badan harus angka";
                 }
@@ -109,7 +109,7 @@ public class SignUpController implements Initializable {
                 flag = false;
             }
             if(popupmessage != ""){
-                  Alert alert = new Alert(Alert.AlertType.ERROR);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Invalid Input");
                 alert.setHeaderText("Pengisian Tidak Benar");
                 alert.setContentText(popupmessage);

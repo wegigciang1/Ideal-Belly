@@ -49,7 +49,7 @@
                             <NumberAxis side="LEFT" />
                           </yAxis>
                         </LineChart>
-                        <Button layoutX="215.0" layoutY="270.0" minHeight="18.0" minWidth="39.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="54.0" style="-fx-background-radius: 30;" text="+">
+                        <Button fx:id="button_add" layoutX="215.0" layoutY="270.0" minHeight="18.0" minWidth="39.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="54.0" style="-fx-background-radius: 30;" text="+">
                            <font>
                               <Font name="SansSerif Regular" size="20.0" />
                            </font>

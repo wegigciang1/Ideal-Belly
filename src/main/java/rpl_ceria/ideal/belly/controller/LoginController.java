@@ -18,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import rpl_ceria.ideal.belly.db.UserDAO;
 import rpl_ceria.ideal.belly.model.User;
+import rpl_ceria.ideal.belly.model.UserSession;
 
 /**
  * FXML Controller class
@@ -42,6 +43,7 @@ public class LoginController implements Initializable {
         if(user != null) {
             System.out.println("Login Berhasil");
             
+            UserSession.setUserSession(user);
             Parent root= FXMLLoader.load(getClass().getResource("/fxml/Home.fxml"));
             Scene scene = new Scene(root);
             scene.getStylesheets().add("/styles/Styles.css");

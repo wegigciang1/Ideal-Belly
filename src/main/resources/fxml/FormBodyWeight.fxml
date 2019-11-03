@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="111.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rpl_ceria.ideal.belly.controller.FormBodyWeightController">
+   <children>
+      <Label layoutX="14.0" layoutY="27.0" text="Tanggal" />
+      <Label fx:id="tanggal_harian" layoutX="139.0" layoutY="27.0" prefHeight="17.0" prefWidth="149.0" />
+      <Label layoutX="14.0" layoutY="69.0" prefHeight="17.0" prefWidth="117.0" text="Berat Badan" />
+      <TextField fx:id="berat_badan" layoutX="139.0" layoutY="64.0" prefHeight="27.0" prefWidth="149.0" />
+   </children>
+</AnchorPane>
