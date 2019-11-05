@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.util.Base64;
 
 /**
  *
@@ -15,7 +16,8 @@ public class UserDAO {
     public static void addUser(User usr) throws SQLException, ClassNotFoundException{
         String addStmt = "INSERT INTO user VALUES(null, '";
         addStmt = addStmt.concat(usr.getEmail() + "','");
-        addStmt = addStmt.concat(usr.getPassword() + "','");
+        String encodedPassword = Base64.getEncoder().encodeToString(usr.getPassword().getBytes());
+        addStmt = addStmt.concat(encodedPassword + "','");
         addStmt = addStmt.concat(usr.getNama() + "','");
         addStmt = addStmt.concat(usr.getTanggal_lahir().toString() + "',");
         addStmt = addStmt.concat(usr.getTinggi_badan() + ")");
@@ -28,8 +30,9 @@ public class UserDAO {
     }
     
     public static User searchUser(String email, String password) throws SQLException, ClassNotFoundException, ParseException {
+        String encodedPassword = Base64.getEncoder().encodeToString(password.getBytes());
         String selectStmt = "SELECT * FROM user WHERE email='" + email 
-                + "' AND password='" + password + "'";
+                + "' AND password='" + encodedPassword + "'";
         try {
             ResultSet rsUsr = DBUtil.getInstance().dbExecuteQuery(selectStmt);
             User user = getUserFromResultSet(rsUsr);
@@ -59,7 +62,9 @@ public class UserDAO {
             usr = new User();
             usr.setId(rs.getInt("id"));
             usr.setEmail(rs.getString("email"));
-            usr.setPassword(rs.getString("password"));
+            byte[] decodedBytes = Base64.getDecoder().decode(rs.getString("password"));
+            String decodedPassword = new String(decodedBytes);
+            usr.setPassword(decodedPassword);
             usr.setNama(rs.getString("nama"));
             usr.setTanggal_lahir(LocalDate.parse(rs.getString("tanggal_lahir")));
 //            usr.setTanggal_lahir(rs.getDate("tanggal_lahir"));
@@ -77,8 +82,8 @@ public class UserDAO {
         updateStmt = !usr.getNama().equals("") ? 
                 updateStmt.concat(" nama='" + usr.getNama() + "',") 
                 : updateStmt;
-        
-        updateStmt = updateStmt.concat(" password='" + usr.getPassword() + "',");
+        String encodedPassword = Base64.getEncoder().encodeToString(usr.getPassword().getBytes());
+        updateStmt = updateStmt.concat(" password='" + encodedPassword + "',");
         updateStmt = updateStmt.concat(" tanggal_lahir='" + usr.getTanggal_lahir() + "',");
         updateStmt = updateStmt.concat(" tinggi_badan=" + usr.getTinggi_badan());
         
