@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="anchor_lvl1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rpl_ceria.ideal.belly.controller.TipsController">
+   <children>
+      <AnchorPane fx:id="anhcor_lvl2" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <AnchorPane fx:id="anchor_lvl3" layoutY="53.0" prefHeight="347.0" prefWidth="600.0" style="-fx-background-color: #BDB8B8;">
+               <children>
+                  <AnchorPane fx:id="bilah_atas" layoutY="-53.0" prefHeight="51.0" prefWidth="600.0" style="-fx-background-color: white;">
+                     <children>
+                        <Hyperlink layoutX="532.0" layoutY="14.0" onAction="#handleLogOutLinkAction" text="Logout" />
+                        <Hyperlink layoutX="453.0" layoutY="14.0" onAction="#handleEditProfileLinkAction" text="Edit Profile" />
+                        <Hyperlink layoutX="396.0" layoutY="14.0" onAction="#handleHomeLinkAction" text="Home" />
+                        <Label fx:id="selamatDatang_label" layoutX="14.0" layoutY="8.0" text="Selamat Datang">
+                           <font>
+                              <Font size="15.0" />
+                           </font></Label>
+                        <Hyperlink layoutX="351.0" layoutY="14.0" text="Tips" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="bilah_kiri" layoutX="6.0" layoutY="6.0" prefHeight="335.0" prefWidth="161.0" style="-fx-background-color: white; -fx-border-radius: 4; -fx-background-radius: 4; -fx-padding: 8;">
+                     <children>
+                        <Label layoutX="25.0" layoutY="166.0" text="Berat Awal" />
+                        <Label layoutX="25.0" layoutY="196.0" text="Berat Saat Ini" />
+                        <Label layoutX="25.0" layoutY="228.0" text="Berat Sasaran" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="bilah_kanan" layoutX="172.0" layoutY="6.0" prefHeight="335.0" prefWidth="424.0" style="-fx-background-color: white; -fx-border-radius: 4; -fx-background-radius: 4; -fx-padding: 8;">
+                     <children>
+                        <TableView fx:id="Tabel_Makanan" layoutX="16.0" layoutY="14.0" prefHeight="140.0" prefWidth="392.0">
+                          <columns>
+                            <TableColumn fx:id="Col_Id" prefWidth="75.0" text="Id" />
+                            <TableColumn fx:id="Col_Nama" prefWidth="75.0" text="Nama Makanan" />
+                              <TableColumn fx:id="Col_Berat" prefWidth="75.0" text="Berat" />
+                              <TableColumn fx:id="Col_Kalori" prefWidth="75.0" text="Kalori" />
+                          </columns>
+                        </TableView>
+                     </children></AnchorPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

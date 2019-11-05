@@ -165,6 +165,30 @@ public class EditProfileController implements Initializable {
         window.setScene(scene);
         window.show();
     }
+    
+    @FXML
+    private void handleTipsLinkAction(ActionEvent event) throws IOException {
+        System.out.println("Request Tips");
+        //Bagian Tips HyperLink
+        try{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Tips.fxml"));
+        Parent root= (Parent) loader.load();
+        
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add("/styles/Styles.css");
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        //untuk melempar user
+//        TipsController tc=loader.getController();
+//        tc.tambah(userTamp);  
+        //menampilkan window
+        window.setScene(scene);
+        window.show();
+        }
+        catch(IOException e){
+            System.out.println("Error Terjadi: " + e);
+            throw e;
+        }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

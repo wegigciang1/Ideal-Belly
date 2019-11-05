@@ -19,6 +19,7 @@
                         <Hyperlink layoutX="532.0" layoutY="14.0" onAction="#handleLogOutLinkAction" text="Logout" />
                         <Hyperlink layoutX="453.0" layoutY="14.0" text="Edit Profile" />
                         <Hyperlink layoutX="396.0" layoutY="14.0" onAction="#handleHomeLinkAction" text="Home" />
+                        <Hyperlink layoutX="351.0" layoutY="14.0" onAction="#handleTipsLinkAction" text="Tips" />
                      </children>
             </AnchorPane>
                   <AnchorPane fx:id="bilah_kiri" layoutX="6.0" layoutY="6.0" prefHeight="335.0" prefWidth="150.0" style="-fx-background-color: white; -fx-border-radius: 4; -fx-background-radius: 4; -fx-padding: 8;">
