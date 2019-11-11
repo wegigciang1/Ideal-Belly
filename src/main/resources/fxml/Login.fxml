@@ -17,27 +17,27 @@
          <children>
             <AnchorPane id="anchor1" prefHeight="321.0" prefWidth="427.0" styleClass="anchor1">
                <children>
-                  <AnchorPane layoutX="124.0" layoutY="29.0" prefHeight="343.0" prefWidth="353.0" style="-fx-background-color: white; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-radius: 4; -fx-border-radius: 4; -fx-padding: 8;">
+                  <ImageView fitHeight="463.0" fitWidth="605.0" layoutY="-37.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../picture/background1.png" />
+                     </image>
+                  </ImageView>
+                  <AnchorPane layoutX="248.0" layoutY="74.0" prefHeight="278.0" prefWidth="304.0" style="-fx-background-color: white; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-radius: 4; -fx-border-radius: 4; -fx-padding: 8;">
                      <children>
-                        <ImageView fitHeight="44.0" fitWidth="140.0" layoutX="104.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../picture/PicsArt_10-23-10.57.36.png" />
-                           </image>
-                        </ImageView>
-                        <Label layoutX="130.0" layoutY="25.0" style="-fx-text-fill: grey;" text="Welcome">
+                        <Label layoutX="98.0" layoutY="23.0" style="-fx-text-fill: grey;" text="Welcome">
                            <font>
-                              <Font name="Droid Sans Fallback" size="20.0" />
+                              <Font name="Droid Sans Fallback" size="25.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="email" layoutX="79.0" layoutY="137.0" prefHeight="26.0" prefWidth="196.0" promptText="Email" styleClass="input" />
-                        <PasswordField fx:id="password" layoutX="79.0" layoutY="191.0" prefHeight="26.0" prefWidth="196.0" promptText="Password" styleClass="input" />
-                        <Button fx:id="button" layoutX="229.0" layoutY="290.0" mnemonicParsing="false" onAction="#handleLoginButtonAction" style="-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5);" text="Login" textFill="WHITE" />
-                        <Hyperlink layoutX="77.0" layoutY="223.0" onAction="#handleForgotPasswordLinkAction" text="Lupa Password?">
+                        <TextField fx:id="email" layoutX="55.0" layoutY="103.0" prefHeight="26.0" prefWidth="196.0" promptText="Email" styleClass="input" />
+                        <PasswordField fx:id="password" layoutX="55.0" layoutY="155.0" prefHeight="26.0" prefWidth="196.0" promptText="Password" styleClass="input" />
+                        <Button fx:id="button" layoutX="214.0" layoutY="241.0" mnemonicParsing="false" onAction="#handleLoginButtonAction" style="-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5);" text="Login" textFill="WHITE" />
+                        <Hyperlink layoutX="55.0" layoutY="192.0" onAction="#handleForgotPasswordLinkAction" text="Lupa Password?">
                            <font>
                               <Font size="11.0" />
                            </font>
                         </Hyperlink>
-                        <Hyperlink layoutX="77.0" layoutY="241.0" onAction="#handleSignUpLinkAction" text="Belum punya akun? Buat Akun">
+                        <Hyperlink layoutX="166.0" layoutY="213.0" onAction="#handleSignUpLinkAction" text="Buat Akun">
                            <font>
                               <Font size="11.0" />
                            </font>
@@ -47,8 +47,13 @@
                               <Font name="Droid Sans Fallback" size="10.0" />
                            </font>
                         </Label>
-                        <Label layoutX="79.0" layoutY="118.0" text="Email" />
-                        <Label layoutX="79.0" layoutY="172.0" text="Password" />
+                        <Label layoutX="55.0" layoutY="85.0" text="Email" />
+                        <Label layoutX="55.0" layoutY="137.0" text="Password" />
+                        <Label layoutX="58.0" layoutY="215.0" text="Belum Punya Akun?">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
                </children>

@@ -66,6 +66,9 @@ public class TipsController implements Initializable {
     private TableColumn<DaftarMakanan, Double> Col_Berat;
     @FXML
     private TableColumn<DaftarMakanan, Double> Col_Kalori;
+    //@FXML
+   // private ListView<DaftarMakanan> list_Makanan;
+    
     
     @FXML
     private void handleLogOutLinkAction(ActionEvent event) throws IOException {
@@ -106,12 +109,36 @@ public class TipsController implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Home.fxml"));
         Parent root= (Parent) loader.load();
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("/styles/Styles.css");
+        scene.getStylesheets().add("/styles/HomeStyles.css");
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 //        HomeController home=loader.getController();
 //        home.tambah(userTamp); 
         window.setScene(scene);
         window.show();
+    }
+    
+     @FXML
+    private void handleAktifitasTipsLinkAction(ActionEvent event) throws IOException {
+        System.out.println("Request Tips");
+        //Bagian Tips HyperLink
+        try{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AktifitasTips.fxml"));
+        Parent root= (Parent) loader.load();
+        
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add("/styles/Styles.css");
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        //untuk melempar user
+//        TipsController tc=loader.getController();
+//        tc.tambah(userTamp);  
+        //menampilkan window
+        window.setScene(scene);
+        window.show();
+        }
+        catch(IOException e){
+            System.out.println("Error Terjadi: " + e);
+            throw e;
+        }
     }
     
     @Override
@@ -127,7 +154,9 @@ public class TipsController implements Initializable {
         try {
             data = DaftarMakananDAO.searchMakanans();
             Tabel_Makanan.setItems(data);
-   
+            //list_Makanan.setItems(data);
+            
+            System.out.println(data);
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(TipsController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -136,19 +165,10 @@ public class TipsController implements Initializable {
         Col_Nama.prefWidthProperty().bind(Tabel_Makanan.widthProperty().divide(4));
         Col_Berat.prefWidthProperty().bind(Tabel_Makanan.widthProperty().divide(4));
         Col_Kalori.prefWidthProperty().bind(Tabel_Makanan.widthProperty().divide(4));
-        
-        
-        
+      
+       
     
     }    
 
-    //untuk mendapatkan object user yang login sekarang
-//    User userTamp;
-//    public void tambah(User userSekarang){
-//        userTamp= userSekarang;
-//        
-//        this.selamatDatang_label.setText("Welcome, "+ userTamp.getNama());
-//        
-//    }
-
+   
 }

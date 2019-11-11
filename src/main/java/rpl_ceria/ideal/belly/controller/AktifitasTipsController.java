@@ -25,8 +25,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import rpl_ceria.ideal.belly.db.DaftarAktifitasDAO;
 
 import rpl_ceria.ideal.belly.db.DaftarMakananDAO;
+import rpl_ceria.ideal.belly.model.DaftarAktifitas;
 
 import rpl_ceria.ideal.belly.model.DaftarMakanan;
 
@@ -52,13 +54,13 @@ public class AktifitasTipsController implements Initializable {
     @FXML
     private AnchorPane anchor1;
     @FXML
-    private TableView<?> Tabel_Aktifitas;
+    private TableView<DaftarAktifitas> Tabel_Aktifitas;
     @FXML
-    private TableColumn<?, ?> Col_Id_Aktifitas;
+    private TableColumn<DaftarAktifitas, Integer> Col_Id_Aktifitas;
     @FXML
-    private TableColumn<?, ?> Col_Nama_Aktifitas;
+    private TableColumn<DaftarAktifitas, String> Col_Nama_Aktifitas;
     @FXML
-    private TableColumn<?, ?> Col_KaloriTerbakar_Aktifitas;
+    private TableColumn<DaftarAktifitas, Double> Col_KaloriTerbakar_Aktifitas;
     
     
     @FXML

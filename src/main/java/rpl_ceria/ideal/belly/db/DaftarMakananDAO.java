@@ -43,7 +43,10 @@ public class DaftarMakananDAO {
     }
 
     public static ObservableList<DaftarMakanan> searchMakanans() throws SQLException, ClassNotFoundException {
-        String selectStmt = "SELECT * FROM daftarMakanan";
+        Random random=new Random();
+        int randomInteger = random.nextInt(9);
+        String selectStmt = "SELECT * FROM daftarMakanan where jenis='"+ randomInteger + "'";
+        System.out.println(randomInteger);
         try {
             ResultSet rsMkn = DBUtil.getInstance().dbExecuteQuery(selectStmt);
             ObservableList<DaftarMakanan> newList;
@@ -67,23 +70,24 @@ public class DaftarMakananDAO {
             
             mknList.add(mkn);
         }
-        Random rand = new Random(); 
-		// create a temporary list for storing 
-		// selected element 
-                //untuk menentukan mau brp banyak yang di random
-                int jumlah_random= 4;
-		ObservableList<DaftarMakanan> newList = FXCollections.observableArrayList(); 
-		for (int i = 0; i < jumlah_random; i++) { 
-
-			// take a raundom index between 0 to size 
-			// of given List 
-			int randomIndex = rand.nextInt(mknList.size()); 
-
-			// add element in temporary list 
-                        newList.add(mknList.get(randomIndex));
-			//newList.add(mknList.get(randomIndex)); 
-		} 
-	return newList; 
+//        Random rand = new Random(); 
+//		// create a temporary list for storing 
+//		// selected element 
+//                //untuk menentukan mau brp banyak yang di random
+//                int jumlah_random= 4;
+//		ObservableList<DaftarMakanan> newList = FXCollections.observableArrayList(); 
+//		for (int i = 0; i < jumlah_random; i++) { 
+//
+//			// take a raundom index between 0 to size 
+//			// of given List 
+//			int randomIndex = rand.nextInt(mknList.size()); 
+//
+//			// add element in temporary list 
+//                        newList.add(mknList.get(randomIndex));
+//			//newList.add(mknList.get(randomIndex)); 
+//		} 
+	//return newList;
+        return mknList;
     }
     
     // Java program select a random element from List 

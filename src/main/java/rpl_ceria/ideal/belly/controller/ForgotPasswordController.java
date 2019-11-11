@@ -19,13 +19,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import rpl_ceria.ideal.belly.db.UserDAO;
 import rpl_ceria.ideal.belly.model.User;
@@ -127,7 +122,7 @@ public class ForgotPasswordController implements Initializable {
                 alert.showAndWait();
             }
         }
-        catch(Exception e){
+        catch(IOException | ClassNotFoundException | SQLException | ParseException e){
             System.out.println("Error: " + e);
         }
     }

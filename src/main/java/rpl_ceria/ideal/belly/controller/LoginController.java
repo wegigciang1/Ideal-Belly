@@ -46,7 +46,7 @@ public class LoginController implements Initializable {
             UserSession.setUserSession(user);
             Parent root= FXMLLoader.load(getClass().getResource("/fxml/Home.fxml"));
             Scene scene = new Scene(root);
-            scene.getStylesheets().add("/styles/Styles.css");
+            scene.getStylesheets().add("/styles/HomeStyles.css");
             Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
             
             window.setScene(scene);
