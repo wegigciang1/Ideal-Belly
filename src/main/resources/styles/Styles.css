@@ -1,3 +1,15 @@
 .button {
     -fx-font-weight: bold;
 }
+
+.button, .button_add {
+
+    /*-fx-border-color: #02A2EF;*/
+    -fx-background-color: #7ED957;
+    /*-fx-background-color: #5BC1F2*/
+
+}
+.button:hover, .button:focus, .button:active {
+    -fx-background-color: #5FC136;
+    /*-fx-border-color: #02A2EF; */    
+}

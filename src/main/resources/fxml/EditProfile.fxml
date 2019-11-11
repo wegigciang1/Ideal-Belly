@@ -5,6 +5,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -16,10 +18,35 @@
                <children>
                   <AnchorPane fx:id="bilah_atas" layoutY="-53.0" prefHeight="51.0" prefWidth="600.0" style="-fx-background-color: white;">
                      <children>
-                        <Hyperlink layoutX="532.0" layoutY="14.0" onAction="#handleLogOutLinkAction" text="Logout" />
-                        <Hyperlink layoutX="453.0" layoutY="14.0" text="Edit Profile" />
-                        <Hyperlink layoutX="396.0" layoutY="14.0" onAction="#handleHomeLinkAction" text="Home" />
-                        <Hyperlink layoutX="351.0" layoutY="14.0" onAction="#handleTipsLinkAction" text="Tips" />
+                        <ImageView fitHeight="43.0" fitWidth="133.0" layoutX="14.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../picture/PicsArt_10-23-10.57.36.png" />
+                           </image>
+                        </ImageView>
+                        <AnchorPane fx:id="anchor1" layoutX="204.0" prefHeight="53.0" prefWidth="397.0" style="-fx-background-color: ff914d;">
+                           <children>
+                              <Hyperlink layoutX="60.0" layoutY="13.0" onAction="#handleTipsLinkAction" text="Tips" textFill="WHITE">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Hyperlink>
+                              <Hyperlink layoutX="120.0" layoutY="13.0" onAction="#handleHomeLinkAction" text="Home" textFill="WHITE">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Hyperlink>
+                              <Hyperlink layoutX="190.0" layoutY="13.0" text="Edit Profile" textFill="WHITE">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Hyperlink>
+                              <Hyperlink layoutX="300.0" layoutY="13.0" onAction="#handleLogOutLinkAction" text="Logout" textFill="WHITE">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Hyperlink>
+                           </children>
+                        </AnchorPane>
                      </children>
             </AnchorPane>
                   <AnchorPane fx:id="bilah_kiri" layoutX="6.0" layoutY="6.0" prefHeight="335.0" prefWidth="150.0" style="-fx-background-color: white; -fx-border-radius: 4; -fx-background-radius: 4; -fx-padding: 8;">
@@ -42,7 +69,10 @@
                         <PasswordField fx:id="password" layoutX="16.0" layoutY="147.0" promptText="Password" text="Password_sekarang" />
                         <PasswordField fx:id="retypePass" layoutX="16.0" layoutY="180.0" promptText="Retype_Password" text="Retype_Password" />
                         <TextField fx:id="tinggi_badan" layoutX="16.0" layoutY="213.0" promptText="Tinggi_sekarang" text="154" />
-                        <Button layoutX="202.0" layoutY="260.0" mnemonicParsing="false" onAction="#handleEditProfileButtonAction" text="submit" />
+                        <Button layoutX="202.0" layoutY="260.0" mnemonicParsing="false" onAction="#handleEditProfileButtonAction" style="-fx-text-fill: white;" text="submit">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></Button>
                      </children></AnchorPane>
                </children>
             </AnchorPane>
