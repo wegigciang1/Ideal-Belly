@@ -16,21 +16,18 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import rpl_ceria.ideal.belly.db.DaftarAktifitasDAO;
-
-import rpl_ceria.ideal.belly.db.DaftarMakananDAO;
 import rpl_ceria.ideal.belly.model.DaftarAktifitas;
-
-import rpl_ceria.ideal.belly.model.DaftarMakanan;
 
 /**
  * FXML Controller class
@@ -40,28 +37,7 @@ import rpl_ceria.ideal.belly.model.DaftarMakanan;
 public class AktifitasTipsController implements Initializable {
 
     @FXML
-    private AnchorPane anchor_lvl1;
-    @FXML
-    private AnchorPane anhcor_lvl2;
-    @FXML
-    private AnchorPane anchor_lvl3;
-    @FXML
-    private AnchorPane bilah_atas;
-    @FXML
-    private AnchorPane bilah_kiri;
-    @FXML
     private AnchorPane bilah_kanan;
-    @FXML
-    private AnchorPane anchor1;
-    @FXML
-    private TableView<DaftarAktifitas> Tabel_Aktifitas;
-    @FXML
-    private TableColumn<DaftarAktifitas, Integer> Col_Id_Aktifitas;
-    @FXML
-    private TableColumn<DaftarAktifitas, String> Col_Nama_Aktifitas;
-    @FXML
-    private TableColumn<DaftarAktifitas, Double> Col_KaloriTerbakar_Aktifitas;
-    
     
     @FXML
     private void handleLogOutLinkAction(ActionEvent event) throws IOException {
@@ -85,7 +61,7 @@ public class AktifitasTipsController implements Initializable {
         Parent root= (Parent) loader.load();
         
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("/styles/Styles.css");
+        scene.getStylesheets().add("/styles/TipsStyles.css");
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         //untuk melempar user
 //        TipsController tc=loader.getController();
@@ -107,10 +83,6 @@ public class AktifitasTipsController implements Initializable {
         Parent root= (Parent) loader.load();
         
         Scene scene = new Scene(root);
-//        //untuk melempar user
-//        EditProfileController epc=loader.getController();
-//        epc.tambah(userTamp);  
-        //menampilkan window
         scene.getStylesheets().add("/styles/Styles.css");
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
             
@@ -128,8 +100,6 @@ public class AktifitasTipsController implements Initializable {
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/styles/HomeStyles.css");
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//        HomeController home=loader.getController();
-//        home.tambah(userTamp); 
         window.setScene(scene);
         window.show();
     }
@@ -138,26 +108,54 @@ public class AktifitasTipsController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
           //Tabel Aktifitas
-        Col_Id_Aktifitas.setCellValueFactory(new PropertyValueFactory("id"));
-        Col_Nama_Aktifitas.setCellValueFactory(new PropertyValueFactory("aktifitas"));
-        Col_KaloriTerbakar_Aktifitas.setCellValueFactory(new PropertyValueFactory("kalori_terbakar"));
         
-        ObservableList<DaftarAktifitas> aktifitas_data;
         try {
-            aktifitas_data = DaftarAktifitasDAO.searchAktifitass();
-            Tabel_Aktifitas.setItems(aktifitas_data);
-   
+            Label title_tipsmakanan = new Label("Rekomendasi Aktifitas");
+            title_tipsmakanan.setLayoutX(16.0);
+            title_tipsmakanan.setLayoutY(16.0);
+            title_tipsmakanan.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, 18));
+            this.bilah_kanan.getChildren().addAll(title_tipsmakanan);
+            
+            ObservableList<DaftarAktifitas> data;
+            data = DaftarAktifitasDAO.searchAktifitass();
+            // GridPane untuk setiap data tips
+            double layoutX = 16.0, layoutY = 50.0;
+            int gridColumns = 0;
+            
+            for(DaftarAktifitas item : data){
+                GridPane grid = new GridPane();
+                grid.setVgap(10);
+                grid.setPrefSize(190, 100);
+                grid.setPadding(new Insets(10,10,10,10));
+                grid.getStyleClass().add("tips-grid");
+                grid.setStyle("-fx-background-image:url(\"file:db_pictures/aktifitas/" + item.getPath_img() + "\");");
+                
+                grid.setLayoutX(layoutX); 
+                grid.setLayoutY(layoutY);
+                gridColumns++;
+                if(gridColumns == 2){
+                    layoutX = 16.0;
+                    layoutY += 105.0;
+                    gridColumns = 0;
+                } else{
+                    layoutX += 195.0;
+                }
+                        
+                // add detail data ke grid
+                Label nama_makanan = new Label(item.getAktifitas());
+                nama_makanan.setPrefWidth(190);
+                nama_makanan.setWrapText(true);
+                nama_makanan.setFont(Font.font("Arial", FontWeight.BOLD, 16));
+                grid.add(nama_makanan, 1, 0);
+                
+                Label jumlah_kalori = new Label("Kalori : " + String.valueOf(item.getKalori_terbakar()) + " / 30 menit");
+                jumlah_kalori.setFont(Font.font("Arial", FontWeight.MEDIUM, 14));
+                grid.add(jumlah_kalori, 1, 1);
+                
+                this.bilah_kanan.getChildren().addAll(grid);   
+            }
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(TipsController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //resize TableColumn DaftarAktifitas width
-        Col_Id_Aktifitas.prefWidthProperty().bind(Tabel_Aktifitas.widthProperty().divide(3));
-        Col_Nama_Aktifitas.prefWidthProperty().bind(Tabel_Aktifitas.widthProperty().divide(3));
-        Col_KaloriTerbakar_Aktifitas.prefWidthProperty().bind(Tabel_Aktifitas.widthProperty().divide(3));
-      
-       
-    
     }    
-
-   
 }

@@ -56,10 +56,23 @@ public class DaftarAktifitas{
         this.kalori_terbakar.set(kalori_terbakar);
     }
         
-        
+    /**
+     * @return the path_img
+     */
+    public String getPath_img() {
+        return path_img.get();
+    }
+
+    /**
+     * @param path_img the deskripsi to set
+     */
+    public void setPath_img(String path_img) {
+        this.path_img.set(path_img);
+    }
         
     private SimpleIntegerProperty id= new SimpleIntegerProperty();
     private SimpleStringProperty aktifitas= new SimpleStringProperty();
     private SimpleIntegerProperty kalori_terbakar= new SimpleIntegerProperty();
+    private SimpleStringProperty path_img= new SimpleStringProperty();
     
 }

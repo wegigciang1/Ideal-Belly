@@ -64,17 +64,7 @@
                   </AnchorPane>
                   <AnchorPane fx:id="bilah_kanan" layoutX="155.0" layoutY="6.0" prefHeight="335.0" prefWidth="441.0" style="-fx-background-color: white; -fx-border-radius: 4; -fx-background-radius: 4; -fx-padding: 8;">
                      <children>
-                        <Label layoutX="25.0" layoutY="31.0" text="Tips Aktifitas">
-                           <font>
-                              <Font size="15.0" />
-                           </font></Label>
-                        <TableView fx:id="Tabel_Aktifitas" layoutX="25.0" layoutY="70.0" prefHeight="149.0" prefWidth="392.0">
-                           <columns>
-                              <TableColumn fx:id="Col_Id_Aktifitas" prefWidth="65.0" text="Id" />
-                              <TableColumn fx:id="Col_Nama_Aktifitas" prefWidth="172.0" text="Aktifitas" />
-                              <TableColumn fx:id="Col_KaloriTerbakar_Aktifitas" prefWidth="154.0" text="Kalori Terbakar" />
-                           </columns>
-                        </TableView>
+                        
                      </children></AnchorPane>
                </children>
             </AnchorPane>

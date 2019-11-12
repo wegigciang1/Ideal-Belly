@@ -38,6 +38,7 @@ public class DaftarAktifitasDAO {
             akt.setId(rs.getInt("id"));
             akt.setAktifitas(rs.getString("aktifitas"));
             akt.setKalori_terbakar(rs.getInt("kalori_terbakar"));
+            akt.setPath_img(rs.getString("path_img"));
         }
         return akt;
     }
@@ -62,6 +63,7 @@ public class DaftarAktifitasDAO {
             akt.setId(rs.getInt("id"));
             akt.setAktifitas(rs.getString("aktifitas"));
             akt.setKalori_terbakar(rs.getInt("kalori_terbakar"));
+            akt.setPath_img(rs.getString("path_img"));
             
             aktList.add(akt);
         }
@@ -88,7 +90,8 @@ public class DaftarAktifitasDAO {
     public static void updateAktifitas(String id, DaftarAktifitas akt) throws SQLException, ClassNotFoundException {
         String updateStmt = "UPDATE aktivitas SET id='" + akt.getId() + "',"
                 + "nama = '" + akt.getAktifitas() + "',"
-                + "jenis = '" + akt.getKalori_terbakar() + "' WHERE id='" + id + "'";
+                + "jenis = '" + akt.getKalori_terbakar() + "',"
+                + "path_img = '" + akt.getPath_img() + "' WHERE id='" + id + "'";
         try {
             DBUtil.getInstance().dbExecuteUpdate(updateStmt);
         } catch (SQLException e) {
@@ -99,7 +102,8 @@ public class DaftarAktifitasDAO {
     public static void addAktifitas(DaftarAktifitas akt) throws SQLException, ClassNotFoundException {
         String updateStmt = "INSERT INTO aktivitas (id, aktifitas, kalori_terbakar) VALUES ('" + akt.getId() + "', "
                 + "nama = '" + akt.getAktifitas() + "',"
-                + "jenis = '" + akt.getKalori_terbakar() + "')";
+                + "jenis = '" + akt.getKalori_terbakar() + "',"
+                + "path_img = '" + akt.getPath_img() + "')";
         try {
             DBUtil.getInstance().dbExecuteUpdate(updateStmt);
         } catch (SQLException e) {
