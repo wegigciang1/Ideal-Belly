@@ -16,17 +16,17 @@ import javafx.beans.property.SimpleStringProperty;
 public class DaftarMakanan {
 
     /**
-     * @return the jenis
+     * @return the deskripsi
      */
-    public String getJenis() {
-        return jenis.get();
+    public String getDeskripsi() {
+        return deskripsi.get();
     }
 
     /**
-     * @param jenis the jenis to set
+     * @param deskripsi the deskripsi to set
      */
-    public void setJenis(String jenis) {
-        this.jenis.set(jenis);
+    public void setDeskripsi(String deskripsi) {
+        this.deskripsi.set(deskripsi);
     }
 
     /**
@@ -58,17 +58,17 @@ public class DaftarMakanan {
     }
 
     /**
-     * @return the berat
+     * @return the path_img
      */
-    public double getBerat() {
-        return berat.get();
+    public String getPath_img() {
+        return path_img.get();
     }
 
     /**
-     * @param berat the berat to set
+     * @param path_img the deskripsi to set
      */
-    public void setBerat(double berat) {
-        this.berat.set(berat);
+    public void setPath_img(String path_img) {
+        this.path_img.set(path_img);
     }
 
     /**
@@ -92,8 +92,8 @@ public class DaftarMakanan {
    
     private SimpleIntegerProperty id= new SimpleIntegerProperty();
     private SimpleStringProperty nama_makanan= new SimpleStringProperty();
-    private SimpleDoubleProperty berat= new SimpleDoubleProperty();
     private SimpleDoubleProperty kalori= new SimpleDoubleProperty();
-    private SimpleStringProperty jenis= new SimpleStringProperty();
+    private SimpleStringProperty deskripsi= new SimpleStringProperty();
+    private SimpleStringProperty path_img= new SimpleStringProperty();
 
 }

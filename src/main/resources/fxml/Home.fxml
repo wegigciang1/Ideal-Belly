@@ -52,13 +52,15 @@
                   </AnchorPane>
                   <AnchorPane fx:id="bilah_kiri" layoutX="6.0" layoutY="6.0" prefHeight="335.0" prefWidth="291.0" style="-fx-background-color: white; -fx-border-radius: 4; -fx-background-radius: 4; -fx-padding: 8;">
                      <children>
-                        <Label layoutX="25.0" layoutY="119.0" text="Berat Awal" />
-                        <Label layoutX="27.0" layoutY="152.0" text="Berat Saat Ini" />
-                        <Label fx:id="welcome_label" layoutX="14.0" layoutY="31.0" text="Selamat Datang, Nama">
+<!--                        <Label layoutX="25.0" layoutY="166.0" text="Berat Awal" />
+                        <Label layoutX="25.0" layoutY="196.0" text="Berat Saat Ini" />
+                        <Label layoutX="25.0" layoutY="228.0" text="Berat Sasaran" />-->
+                        <Label layoutX="25.0" layoutY="16.0" text="Selamat Datang,">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Label>
+                        <Label fx:id="selamatDatang_label" layoutX="25.0" layoutY="40.0"/>
                      </children>
                   </AnchorPane>
                   <AnchorPane fx:id="bilah_kanan" layoutX="303.0" layoutY="6.0" prefHeight="335.0" prefWidth="291.0" style="-fx-background-color: white; -fx-border-radius: 4; -fx-background-radius: 4; -fx-padding: 8;">

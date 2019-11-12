@@ -63,15 +63,9 @@
                   </AnchorPane>
                   <AnchorPane fx:id="bilah_kanan" layoutX="155.0" layoutY="6.0" prefHeight="335.0" prefWidth="441.0" style="-fx-background-color: white; -fx-border-radius: 4; -fx-background-radius: 4; -fx-padding: 8;">
                      <children>
-                        <TableView fx:id="Tabel_Makanan" layoutX="32.0" layoutY="45.0" prefHeight="198.0" prefWidth="377.0">
-                          <columns>
-                            <TableColumn fx:id="Col_Id" prefWidth="38.0" text="Id" />
-                            <TableColumn fx:id="Col_Nama" prefWidth="154.0" text="Nama Makanan" />
-                              <TableColumn fx:id="Col_Berat" prefWidth="81.0" text="Berat" />
-                              <TableColumn fx:id="Col_Kalori" prefWidth="103.0" text="Kalori" />
-                          </columns>
-                        </TableView>
-                     </children></AnchorPane>
+                         
+                     </children>
+                  </AnchorPane>
                </children>
             </AnchorPane>
          </children>

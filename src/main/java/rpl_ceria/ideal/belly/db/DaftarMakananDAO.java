@@ -35,18 +35,14 @@ public class DaftarMakananDAO {
             mkn = new DaftarMakanan();
             mkn.setId(rs.getInt("id"));
             mkn.setNama_makanan(rs.getString("nama_makanan"));
-            mkn.setBerat(rs.getDouble("berat"));
             mkn.setKalori(rs.getDouble("kalori"));
-            mkn.setJenis(rs.getString("jenis"));
+            mkn.setDeskripsi(rs.getString("deskripsi"));
         }
         return mkn;
     }
 
     public static ObservableList<DaftarMakanan> searchMakanans() throws SQLException, ClassNotFoundException {
-        Random random=new Random();
-        int randomInteger = random.nextInt(9);
-        String selectStmt = "SELECT * FROM daftarMakanan where jenis='"+ randomInteger + "'";
-        System.out.println(randomInteger);
+        String selectStmt = "SELECT * FROM daftarMakanan";
         try {
             ResultSet rsMkn = DBUtil.getInstance().dbExecuteQuery(selectStmt);
             ObservableList<DaftarMakanan> newList;
@@ -64,30 +60,29 @@ public class DaftarMakananDAO {
             DaftarMakanan mkn = new DaftarMakanan();
             mkn.setId(rs.getInt("id"));
             mkn.setNama_makanan(rs.getString("nama_makanan"));
-            mkn.setBerat(rs.getDouble("berat"));
             mkn.setKalori(rs.getDouble("kalori"));
-            mkn.setJenis(rs.getString("jenis"));
+            mkn.setDeskripsi(rs.getString("deskripsi"));
+            mkn.setPath_img(rs.getString("path_img"));
             
             mknList.add(mkn);
         }
-//        Random rand = new Random(); 
-//		// create a temporary list for storing 
-//		// selected element 
-//                //untuk menentukan mau brp banyak yang di random
-//                int jumlah_random= 4;
-//		ObservableList<DaftarMakanan> newList = FXCollections.observableArrayList(); 
-//		for (int i = 0; i < jumlah_random; i++) { 
-//
-//			// take a raundom index between 0 to size 
-//			// of given List 
-//			int randomIndex = rand.nextInt(mknList.size()); 
-//
-//			// add element in temporary list 
-//                        newList.add(mknList.get(randomIndex));
-//			//newList.add(mknList.get(randomIndex)); 
-//		} 
-	//return newList;
-        return mknList;
+        Random rand = new Random(); 
+		// create a temporary list for storing 
+		// selected element 
+                //untuk menentukan mau brp banyak yang di random
+                int jumlah_random= 4;
+		ObservableList<DaftarMakanan> newList = FXCollections.observableArrayList(); 
+		for (int i = 0; i < jumlah_random; i++) { 
+
+			// take a raundom index between 0 to size 
+			// of given List 
+			int randomIndex = rand.nextInt(mknList.size()); 
+
+			// add element in temporary list 
+                        newList.add(mknList.get(randomIndex));
+			//newList.add(mknList.get(randomIndex)); 
+		} 
+	return newList; 
     }
     
     // Java program select a random element from List 
@@ -102,9 +97,9 @@ public class DaftarMakananDAO {
     public static void updateMakanan(String id, DaftarMakanan mkn) throws SQLException, ClassNotFoundException {
         String updateStmt = "UPDATE daftarMakanan SET id='" + mkn.getId() + "',"
                 + "nama = '" + mkn.getNama_makanan() + "',"
-                + "berat = '" + mkn.getBerat() + "',"
                 + "kalori = '" + mkn.getKalori() + "',"
-                + "jenis = '" + mkn.getJenis() + "' WHERE id='" + id + "'";
+                + "path_img = '" + mkn.getPath_img() + "',"
+                + "deskripsi = '" + mkn.getDeskripsi() + "' WHERE id='" + id + "'";
         try {
             DBUtil.getInstance().dbExecuteUpdate(updateStmt);
         } catch (SQLException e) {
@@ -113,11 +108,11 @@ public class DaftarMakananDAO {
     }
 
     public static void addMakanan(DaftarMakanan mkn) throws SQLException, ClassNotFoundException {
-        String updateStmt = "INSERT INTO daftarMakanan (id, nama, berat, kalori, jenis) VALUES ('" + mkn.getId() + "', "
+        String updateStmt = "INSERT INTO daftarMakanan (id, nama, berat, kalori, deskripsi) VALUES ('" + mkn.getId() + "', "
                 + "nama = '" + mkn.getNama_makanan() + "',"
-                + "berat = '" + mkn.getBerat() + "',"
                 + "kalori = '" + mkn.getKalori() + "',"
-                + "jenis = '" + mkn.getJenis() + "')";
+                + "path_img = '" + mkn.getPath_img() + "',"
+                + "deskripsi = '" + mkn.getDeskripsi() + "')";
         try {
             DBUtil.getInstance().dbExecuteUpdate(updateStmt);
         } catch (SQLException e) {

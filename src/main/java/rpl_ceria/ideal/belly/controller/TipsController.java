@@ -5,6 +5,7 @@
  */
 package rpl_ceria.ideal.belly.controller;
 
+import com.sun.prism.paint.Color;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -16,6 +17,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -24,6 +26,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import rpl_ceria.ideal.belly.db.DaftarMakananDAO;
@@ -42,33 +51,8 @@ public class TipsController implements Initializable {
      * @param url
      * @param private 
      */
-     @FXML
-     private Label selamatDatang_label;
-    @FXML
-    private AnchorPane anchor_lvl1;
-    @FXML
-    private AnchorPane anhcor_lvl2;
-    @FXML
-    private AnchorPane anchor_lvl3;
-    @FXML
-    private AnchorPane bilah_atas;
-    @FXML
-    private AnchorPane bilah_kiri;
     @FXML
     private AnchorPane bilah_kanan;
-    @FXML
-    private TableView<DaftarMakanan> Tabel_Makanan;
-    @FXML
-    private TableColumn<DaftarMakanan, Integer> Col_Id;
-    @FXML
-    private TableColumn<DaftarMakanan, String> Col_Nama;
-    @FXML
-    private TableColumn<DaftarMakanan, Double> Col_Berat;
-    @FXML
-    private TableColumn<DaftarMakanan, Double> Col_Kalori;
-    //@FXML
-   // private ListView<DaftarMakanan> list_Makanan;
-    
     
     @FXML
     private void handleLogOutLinkAction(ActionEvent event) throws IOException {
@@ -126,7 +110,7 @@ public class TipsController implements Initializable {
         Parent root= (Parent) loader.load();
         
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("/styles/Styles.css");
+        scene.getStylesheets().add("/styles/TipsStyles.css");
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         //untuk melempar user
 //        TipsController tc=loader.getController();
@@ -143,32 +127,57 @@ public class TipsController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        //Tabel Makanan
-        Col_Id.setCellValueFactory(new PropertyValueFactory("id"));
-        Col_Nama.setCellValueFactory(new PropertyValueFactory("nama_makanan"));
-        Col_Berat.setCellValueFactory(new PropertyValueFactory("berat"));
-        Col_Kalori.setCellValueFactory(new PropertyValueFactory("kalori"));
-
-        ObservableList<DaftarMakanan> data;
+        // TODO        
+        // Tampilkan tips rekomendasi makanan
         try {
-            data = DaftarMakananDAO.searchMakanans();
-            Tabel_Makanan.setItems(data);
-            //list_Makanan.setItems(data);
+            Label title_tipsmakanan = new Label("Rekomendasi Makanan");
+            title_tipsmakanan.setLayoutX(16.0);
+            title_tipsmakanan.setLayoutY(16.0);
+            title_tipsmakanan.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, 18));
+            this.bilah_kanan.getChildren().addAll(title_tipsmakanan);
             
-            System.out.println(data);
+            ObservableList<DaftarMakanan> data;
+            data = DaftarMakananDAO.searchMakanans();
+            // GridPane untuk setiap data tips
+            double layoutX = 16.0, layoutY = 50.0;
+            int gridColumns = 0;
+            
+            for(DaftarMakanan item : data){
+                GridPane grid = new GridPane();
+                grid.setVgap(10);
+                grid.setPrefSize(190, 100);
+                grid.setPadding(new Insets(10,10,10,10));
+                grid.getStyleClass().add("tips-grid");
+                grid.setStyle("-fx-background-image:url(\"file:db_pictures/makanan/" + item.getPath_img() + "\");");
+                
+                grid.setLayoutX(layoutX); 
+                grid.setLayoutY(layoutY);
+                gridColumns++;
+                if(gridColumns == 2){
+                    layoutX = 16.0;
+                    layoutY += 105.0;
+                    gridColumns = 0;
+                } else{
+                    layoutX += 195.0;
+                }
+                        
+                // add detail data ke grid
+                Label nama_makanan = new Label(item.getNama_makanan());
+                nama_makanan.setPrefWidth(190);
+                nama_makanan.setWrapText(true);
+                nama_makanan.setFont(Font.font("Arial", FontWeight.BOLD, 16));
+//                nama_makanan.setTextFill();
+                grid.add(nama_makanan, 1, 0);
+                
+                Label jumlah_kalori = new Label("Kalori : " + String.valueOf(item.getKalori()));
+                jumlah_kalori.setFont(Font.font("Arial", FontWeight.MEDIUM, 14));
+//                jumlah_kalori.setTextFill(Color.web("#FFFFFF"));
+                grid.add(jumlah_kalori, 1, 1);
+                
+                this.bilah_kanan.getChildren().addAll(grid);   
+            }
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(TipsController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //resize TableColumn DaftarMakanan width
-        Col_Id.prefWidthProperty().bind(Tabel_Makanan.widthProperty().divide(4));
-        Col_Nama.prefWidthProperty().bind(Tabel_Makanan.widthProperty().divide(4));
-        Col_Berat.prefWidthProperty().bind(Tabel_Makanan.widthProperty().divide(4));
-        Col_Kalori.prefWidthProperty().bind(Tabel_Makanan.widthProperty().divide(4));
-      
-       
-    
     }    
-
-   
 }
