@@ -78,7 +78,7 @@ public class EditProfileController implements Initializable {
 
             String popupmessage = "";
             boolean flag = false;
-            if (!Pattern.matches("[a-zA-Z]+", nama.getText())) {
+            if (!Pattern.matches("[a-zA-Z ]+", nama.getText())) {
                 popupmessage = "Nama harus huruf";
                 flag = true;
             }
@@ -175,7 +175,7 @@ public class EditProfileController implements Initializable {
         Parent root= (Parent) loader.load();
         
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("/styles/Styles.css");
+        scene.getStylesheets().add("/styles/TipsStyles.css");
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         //untuk melempar user
 //        TipsController tc=loader.getController();

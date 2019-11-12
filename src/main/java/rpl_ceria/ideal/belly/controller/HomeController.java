@@ -29,10 +29,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
+import javafx.scene.control.Label;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import rpl_ceria.ideal.belly.model.BeratHarian;
 import rpl_ceria.ideal.belly.db.BeratHarianDAO;
+import rpl_ceria.ideal.belly.model.BMI;
 import rpl_ceria.ideal.belly.model.UserSession;
 import rpl_ceria.ideal.belly.model.User;
 
@@ -48,6 +52,9 @@ public class HomeController implements Initializable {
      * @param url
      * @param rb
      */
+    @FXML
+    private Label selamatDatang_label;
+    
     @FXML
     private Button button_add;
     
@@ -116,6 +123,8 @@ public class HomeController implements Initializable {
                             if(!Pattern.matches("[0-9]+[\\.0-9]+", String.valueOf(brtUpdated.getBerat_badan()))){
                                 throw new Exception("Invalid Input");
                             }
+                            User userNow = UserSession.getUserSession();
+                            brtUpdated.setBMI(BMI.countBMI(userNow.getTinggi_badan(), brtUpdated.getBerat_badan()));
                             BeratHarianDAO.addBeratHarian(brtUpdated);
                         } catch (SQLException | ClassNotFoundException ex) {
                             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
@@ -130,6 +139,8 @@ public class HomeController implements Initializable {
                         String emailOld = brt.getEmail();
                         BeratHarian brtUpdated = brtController.getBeratHarian();
                         try {
+                            User userNow = UserSession.getUserSession();
+                            brtUpdated.setBMI(BMI.countBMI(userNow.getTinggi_badan(), brtUpdated.getBerat_badan()));
                             BeratHarianDAO.updateBeratHarian(emailOld, brtUpdated);
                         } catch (SQLException | ClassNotFoundException ex) {
                             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
@@ -148,20 +159,13 @@ public class HomeController implements Initializable {
         System.out.println("Request Tips");
         
         try{   
-        
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/Tips.fxml"));
-        Parent root= (Parent) loader.load();
-//        Parent root= FXMLLoader.load(getClass().getResource("/fxml/Tips.fxml"));
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add("/styles/Styles.css");
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        //untuk melempar user
-//        TipsController tc;
-//        tc = loader.getController();
-//        tc.tambah(userTamp);  
-        //menampilkan window
-        window.setScene(scene);
-        window.show();
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/Tips.fxml"));
+            Parent root= (Parent) loader.load();
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add("/styles/TipsStyles.css");
+            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+            window.setScene(scene);
+            window.show();
         }
         catch(IOException e){
             System.out.println("Error Terjadi: " + e);
@@ -173,17 +177,24 @@ public class HomeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        User userNow = UserSession.getUserSession();
+        selamatDatang_label.setText(userNow.getNama());
+        selamatDatang_label.setFont(Font.font("Arial", FontWeight.BOLD, 18));
+        selamatDatang_label.setWrapText(true);
         button_add.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent event) {
-                User userNow = UserSession.getUserSession();
+            public void handle(ActionEvent event) {       
                 try {
+                    User userNow = UserSession.getUserSession();
                     BeratHarian cek_beratharian = BeratHarianDAO.searchBeratHarianByEmailAndDate(userNow.getEmail(), LocalDate.now(ZoneId.systemDefault()));
                     if(cek_beratharian == null){    
-                        handleAddBodyWeightButtonAction(true, new BeratHarian(userNow.getEmail(), LocalDate.now(ZoneId.systemDefault()), 0));
+                        handleAddBodyWeightButtonAction(true, new BeratHarian(userNow.getEmail(), 
+                                LocalDate.now(ZoneId.systemDefault()), 0, 0));
                     }
                     else{
-                        handleAddBodyWeightButtonAction(false, new BeratHarian(cek_beratharian.getEmail(), cek_beratharian.getTanggal_harian(), cek_beratharian.getBerat_badan()));
+                        handleAddBodyWeightButtonAction(false, new BeratHarian(cek_beratharian.getEmail(), 
+                                cek_beratharian.getTanggal_harian(), cek_beratharian.getBerat_badan(), 
+                                cek_beratharian.getBMI()));
                     }
                 } catch (SQLException | ClassNotFoundException ex) {
                     Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);

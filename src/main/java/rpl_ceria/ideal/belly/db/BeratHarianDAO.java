@@ -1,6 +1,7 @@
 package rpl_ceria.ideal.belly.db;
 
 import rpl_ceria.ideal.belly.model.BeratHarian;
+import rpl_ceria.ideal.belly.model.BMI;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -47,6 +48,7 @@ public class BeratHarianDAO {
             brt.setEmail(rs.getString("email"));
             brt.setTanggal_harian(LocalDate.parse(rs.getString("tanggal_harian")));
             brt.setBerat_badan(rs.getDouble("berat_badan"));
+            brt.setBMI(rs.getDouble("bmi"));
         }
         return brt;
     }
@@ -71,6 +73,7 @@ public class BeratHarianDAO {
             brt.setEmail(rs.getString("email"));
             brt.setTanggal_harian(LocalDate.parse(rs.getString("tanggal_harian")));
             brt.setBerat_badan(rs.getDouble("berat_badan"));
+            brt.setBMI(rs.getDouble("bmi"));
             brtList.add(brt);
         }
         return brtList;
@@ -79,7 +82,8 @@ public class BeratHarianDAO {
     public static void updateBeratHarian(String email, BeratHarian brt) throws SQLException, ClassNotFoundException {
         String updateStmt = "UPDATE berat_harian SET email = '" + brt.getEmail() + "',"
                 + "tanggal_harian = '" + brt.getTanggal_harian() + "',"
-                + "berat_badan = '" + brt.getBerat_badan() + "' WHERE email='" + email + "'";
+                + "berat_badan = '" + brt.getBerat_badan() + "',"
+                + "bmi = '" + brt.getBMI() + "' WHERE email='" + email + "'";
         try {
             DBUtil.getInstance().dbExecuteUpdate(updateStmt);
         } catch (SQLException e) {
@@ -88,10 +92,11 @@ public class BeratHarianDAO {
     }
 
     public static void addBeratHarian(BeratHarian brt) throws SQLException, ClassNotFoundException {
-        String updateStmt = "INSERT INTO berat_harian (id, email, tanggal_harian, berat_badan) VALUES (null, "
+        String updateStmt = "INSERT INTO berat_harian (id, email, tanggal_harian, berat_badan, bmi) VALUES (null, "
                 + "'" + brt.getEmail() + "', "
                 + "'" + brt.getTanggal_harian() + "', "
-                + "" + brt.getBerat_badan() + ")";
+                + "'" + brt.getBerat_badan() + "', "
+                + "" + brt.getBMI() + ")";
         try {
             DBUtil.getInstance().dbExecuteUpdate(updateStmt);
         } catch (SQLException e) {

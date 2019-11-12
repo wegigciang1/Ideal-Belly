@@ -73,7 +73,7 @@ public class SignUpController implements Initializable {
             
             String popupmessage = "";
             boolean flag = false;
-            if(!Pattern.matches("[a-zA-Z]+", nama.getText())){
+            if(!Pattern.matches("[a-zA-Z ]+", nama.getText())){
                 popupmessage = "Nama harus huruf";
                 flag = true;
             }

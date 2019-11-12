@@ -18,10 +18,11 @@ public class BeratHarian {
     public BeratHarian(){
     }
     
-    public BeratHarian(String email, LocalDate tanggal_harian, double berat_badan) {
+    public BeratHarian(String email, LocalDate tanggal_harian, double berat_badan, double bmi) {
         this.email = new SimpleStringProperty(email);
         this.tanggal_harian = tanggal_harian;
         this.berat_badan = new SimpleDoubleProperty(berat_badan);
+        this.bmi = new SimpleDoubleProperty(bmi);
     }
     
     /**
@@ -80,8 +81,23 @@ public class BeratHarian {
         this.berat_badan.set(berat_badan);
     }
     
+    /**
+     * @return the bmi
+     */
+    public double getBMI() {
+        return bmi.get();
+    }
+
+    /**
+     * @param bmi the berat_badan to set
+     */
+    public void setBMI(double bmi) {
+        this.bmi.set(bmi);
+    }
+    
     private SimpleIntegerProperty id = new SimpleIntegerProperty();
     private SimpleStringProperty email = new SimpleStringProperty();
     private LocalDate tanggal_harian;
     private SimpleDoubleProperty berat_badan = new SimpleDoubleProperty();
+    private SimpleDoubleProperty bmi = new SimpleDoubleProperty();
 }
