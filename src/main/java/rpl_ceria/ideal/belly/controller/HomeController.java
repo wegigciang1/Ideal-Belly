@@ -196,8 +196,8 @@ public class HomeController implements Initializable {
         ObservableList<BeratHarian> data;
         String emailNew= userNow.getEmail();
         data = BeratHarianDAO.searchBeratHarianEmails(emailNew);
-        final LineChart<String,Number> lineChart = 
-                new LineChart<String,Number>(xAxis,yAxis);
+        final LineChart<String,Number> lineChart;
+            lineChart = new LineChart<>(xAxis,yAxis);
                                    
         XYChart.Series series = new XYChart.Series();
         series.setName("Berat Harian");
@@ -206,9 +206,7 @@ public class HomeController implements Initializable {
         }
         
         grafik.getData().add(series);    
-        } catch (SQLException ex) {
-            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
         }
         

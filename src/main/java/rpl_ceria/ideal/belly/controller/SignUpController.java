@@ -57,11 +57,6 @@ public class SignUpController implements Initializable {
         
         try{
             if(email.getText().isEmpty() || password.getText().isEmpty() || nama.getText().isEmpty() || tanggal_lahir.getValue() == null || tinggi_badan.getText().isEmpty()){
-               
-//                    Alert alert = new Alert(Alert.AlertType.ERROR);
-//                alert.setTitle("Invalid Registration");
-//                alert.setHeaderText("Wajib Mengisi Semua Data");
-//                alert.setContentText("Data Tidak Boleh Kosong");
                 
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Invalid Registration");

@@ -85,15 +85,6 @@ public class DaftarMakananDAO {
 	return newList; 
     }
     
-    // Java program select a random element from List 
-
-
-//    private static ObservableList<DaftarMakanan> getRandomMakanan(ObservableList<DaftarMakanan> mknList) { 
-		
-	//} 
-
-
-
     public static void updateMakanan(String id, DaftarMakanan mkn) throws SQLException, ClassNotFoundException {
         String updateStmt = "UPDATE daftarMakanan SET id='" + mkn.getId() + "',"
                 + "nama = '" + mkn.getNama_makanan() + "',"

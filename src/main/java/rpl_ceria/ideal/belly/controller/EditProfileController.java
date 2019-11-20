@@ -177,10 +177,7 @@ public class EditProfileController implements Initializable {
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/styles/TipsStyles.css");
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        //untuk melempar user
-//        TipsController tc=loader.getController();
-//        tc.tambah(userTamp);  
-        //menampilkan window
+
         window.setScene(scene);
         window.show();
         }

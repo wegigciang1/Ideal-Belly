@@ -82,7 +82,7 @@ public class DaftarAktifitasDAO {
 
 			// add element in temporary list 
                         aktNewList.add(aktList.get(randomIndex));
-			//newList.add(mknList.get(randomIndex)); 
+		
 		} 
 	return aktNewList; 
     }

@@ -74,10 +74,6 @@ public class TipsController implements Initializable {
         Parent root= (Parent) loader.load();
         
         Scene scene = new Scene(root);
-//        //untuk melempar user
-//        EditProfileController epc=loader.getController();
-//        epc.tambah(userTamp);  
-        //menampilkan window
         scene.getStylesheets().add("/styles/Styles.css");
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
             
@@ -112,10 +108,6 @@ public class TipsController implements Initializable {
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/styles/TipsStyles.css");
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        //untuk melempar user
-//        TipsController tc=loader.getController();
-//        tc.tambah(userTamp);  
-        //menampilkan window
         window.setScene(scene);
         window.show();
         }
@@ -171,7 +163,7 @@ public class TipsController implements Initializable {
                 
                 Label jumlah_kalori = new Label("Kalori : " + String.valueOf(item.getKalori()));
                 jumlah_kalori.setFont(Font.font("Arial", FontWeight.MEDIUM, 14));
-//                jumlah_kalori.setTextFill(Color.web("#FFFFFF"));
+
                 grid.add(jumlah_kalori, 1, 1);
                 
                 this.bilah_kanan.getChildren().addAll(grid);   
