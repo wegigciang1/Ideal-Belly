@@ -64,7 +64,21 @@ public class BeratHarianDAO {
             throw e;
         }
     }
-
+    
+    //tambahan iterasi 3
+    public static ObservableList<BeratHarian> searchBeratHarianEmails(String email) throws SQLException, ClassNotFoundException {
+        String selectStmt = "SELECT * FROM berat_harian WHERE email='" + email + "'";
+        try {
+            ResultSet rsBrt = DBUtil.getInstance().dbExecuteQuery(selectStmt);
+            ObservableList<BeratHarian> brtList = getBeratHarianList(rsBrt);
+            return brtList;
+        } catch (SQLException e) {
+            System.out.println("SQL select operation has been failed: " + e); //Return exception
+            throw e;
+        }
+    }
+    //#########################
+    
     private static ObservableList<BeratHarian> getBeratHarianList(ResultSet rs) throws SQLException, ClassNotFoundException {
         ObservableList<BeratHarian> brtList = FXCollections.observableArrayList();
         while (rs.next()) {
