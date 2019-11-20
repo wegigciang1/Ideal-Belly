@@ -15,6 +15,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -23,6 +24,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import static javafx.scene.control.Alert.AlertType.INFORMATION;
 import javafx.scene.control.Button;
@@ -59,6 +64,9 @@ public class HomeController implements Initializable {
     private Button button_add;
     
     private Alert formBodyWeightRoot;
+    
+     @FXML
+    private LineChart<String, Number> grafik;
     
     @FXML
     private void handleLogOutLinkAction(ActionEvent event) throws IOException {
@@ -181,6 +189,29 @@ public class HomeController implements Initializable {
         selamatDatang_label.setText(userNow.getNama());
         selamatDatang_label.setFont(Font.font("Arial", FontWeight.BOLD, 18));
         selamatDatang_label.setWrapText(true);
+        
+         try {
+        final CategoryAxis xAxis = new CategoryAxis();
+        final NumberAxis yAxis = new NumberAxis();   
+        ObservableList<BeratHarian> data;
+        String emailNew= userNow.getEmail();
+        data = BeratHarianDAO.searchBeratHarianEmails(emailNew);
+        final LineChart<String,Number> lineChart = 
+                new LineChart<String,Number>(xAxis,yAxis);
+                                   
+        XYChart.Series series = new XYChart.Series();
+        series.setName("Berat Harian");
+        for(BeratHarian item : data){
+            series.getData().add(new XYChart.Data<>(item.getTanggal_harian().toString(), item.getBerat_badan()));
+        }
+        
+        grafik.getData().add(series);    
+        } catch (SQLException ex) {
+            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         button_add.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {       
