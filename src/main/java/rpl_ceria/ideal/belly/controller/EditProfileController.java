@@ -21,6 +21,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import rpl_ceria.ideal.belly.db.UserDAO;
 import rpl_ceria.ideal.belly.model.User;
+import rpl_ceria.ideal.belly.model.UserSession;
 
 /**
  * FXML Controller class
@@ -190,6 +191,12 @@ public class EditProfileController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        User userNow = UserSession.getUserSession();
+        email.setText(userNow.getEmail());
+        nama.setText(userNow.getNama());
+        password.setText(userNow.getPassword());
+        retypePass.setText(userNow.getPassword());
+        tinggi_badan.setText(String.valueOf(userNow.getTinggi_badan()));
     }
 
 }

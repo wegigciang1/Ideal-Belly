@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.Random;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.TextField;
 import rpl_ceria.ideal.belly.model.DaftarMakanan;
 
 /**
@@ -28,6 +29,20 @@ public class DaftarMakananDAO {
             throw e;
         }
     }
+    
+    //Tambahan Iterasi3
+    public static DaftarMakanan searchMakananByName(String nama_makanan) throws SQLException, ClassNotFoundException {
+        String selectStmt = "SELECT * FROM  daftarMakanan WHERE nama_makanan='" + nama_makanan + "'";
+        try {
+            ResultSet rsMkn = DBUtil.getInstance().dbExecuteQuery(selectStmt);
+            DaftarMakanan mkn = getMakananFromResultSet(rsMkn);
+            return mkn;
+        } catch (SQLException e) {
+            System.out.println("Sedang mencari makanan dengan nama " + nama_makanan + ", error terjadi: " + e);
+            throw e;
+        }
+    }
+    //
 
     private static DaftarMakanan getMakananFromResultSet(ResultSet rs) throws SQLException {
         DaftarMakanan mkn = null;
@@ -87,8 +102,8 @@ public class DaftarMakananDAO {
     
     public static void updateMakanan(String id, DaftarMakanan mkn) throws SQLException, ClassNotFoundException {
         String updateStmt = "UPDATE daftarMakanan SET id='" + mkn.getId() + "',"
-                + "nama = '" + mkn.getNama_makanan() + "',"
-                + "kalori = '" + mkn.getKalori() + "',"
+                + "nama_makanan = '" + mkn.getNama_makanan() + "',"
+                + "kalori = '" + mkn.getKalori() + ","
                 + "path_img = '" + mkn.getPath_img() + "',"
                 + "deskripsi = '" + mkn.getDeskripsi() + "' WHERE id='" + id + "'";
         try {
@@ -99,11 +114,11 @@ public class DaftarMakananDAO {
     }
 
     public static void addMakanan(DaftarMakanan mkn) throws SQLException, ClassNotFoundException {
-        String updateStmt = "INSERT INTO daftarMakanan (id, nama, berat, kalori, deskripsi) VALUES ('" + mkn.getId() + "', "
-                + "nama = '" + mkn.getNama_makanan() + "',"
-                + "kalori = '" + mkn.getKalori() + "',"
-                + "path_img = '" + mkn.getPath_img() + "',"
-                + "deskripsi = '" + mkn.getDeskripsi() + "')";
+        String updateStmt = "INSERT INTO daftarMakanan (id, nama_makanan, kalori, path_img, deskripsi) VALUES (null, '"
+                + mkn.getNama_makanan() + "',"
+                + mkn.getKalori() + ",'"
+                + mkn.getPath_img() + "','"
+                + mkn.getDeskripsi() + "')";
         try {
             DBUtil.getInstance().dbExecuteUpdate(updateStmt);
         } catch (SQLException e) {
@@ -119,5 +134,7 @@ public class DaftarMakananDAO {
             throw e;
         }
     }
+
+   
 
 }

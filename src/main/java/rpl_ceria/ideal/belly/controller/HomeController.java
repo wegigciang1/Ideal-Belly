@@ -190,7 +190,9 @@ public class HomeController implements Initializable {
         selamatDatang_label.setFont(Font.font("Arial", FontWeight.BOLD, 18));
         selamatDatang_label.setWrapText(true);
         
-         try {
+         try {//linechart
+            double rata2 = 0;
+            double akhir = 0;
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis();   
         ObservableList<BeratHarian> data;
@@ -203,13 +205,18 @@ public class HomeController implements Initializable {
         series.setName("Berat Harian");
         for(BeratHarian item : data){
             series.getData().add(new XYChart.Data<>(item.getTanggal_harian().toString(), item.getBerat_badan()));
+            akhir=item.getBerat_badan();
+            rata2+=item.getBerat_badan();
         }
-        
+        int a = data.size();
+        System.out.println("Rata2: "+(rata2/a));
+        System.out.println("Berat Sekarang: "+akhir);
         grafik.getData().add(series);    
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        //end
         button_add.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {       
@@ -225,9 +232,18 @@ public class HomeController implements Initializable {
                                 cek_beratharian.getTanggal_harian(), cek_beratharian.getBerat_badan(), 
                                 cek_beratharian.getBMI()));
                     }
-                } catch (SQLException | ClassNotFoundException ex) {
+                //tambahan ciang new
+                Parent root = FXMLLoader.load(getClass().getResource("/fxml/Home.fxml"));
+                Scene scene = new Scene(root);
+                scene.getStylesheets().add("/styles/HomeStyles.css");
+                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+                window.setScene(scene);
+                window.show();
+                } catch (SQLException | ClassNotFoundException | IOException ex) {
                     Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                //tambahan ciang new
             }
         });
     }       
