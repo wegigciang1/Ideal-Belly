@@ -165,15 +165,28 @@ public class HomeController implements Initializable {
     @FXML
     private void handleTipsLinkAction(ActionEvent event) throws Exception {
         System.out.println("Request Tips");
-        
-        try{   
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/Tips.fxml"));
+        User userNow = UserSession.getUserSession();
+        try{  
+            
+            System.out.println(userNow.getStatus());
+            if("admin".equals(userNow.getStatus())){
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/TipsAdmin.fxml"));
             Parent root= (Parent) loader.load();
             Scene scene = new Scene(root);
             scene.getStylesheets().add("/styles/TipsStyles.css");
             Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
             window.setScene(scene);
             window.show();
+            }
+            else{
+              FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/TipsUser.fxml"));
+            Parent root= (Parent) loader.load();
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add("/styles/TipsStyles.css");
+            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+            window.setScene(scene);
+            window.show();  
+            }
         }
         catch(IOException e){
             System.out.println("Error Terjadi: " + e);

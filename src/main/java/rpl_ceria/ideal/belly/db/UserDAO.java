@@ -69,6 +69,7 @@ public class UserDAO {
             usr.setTanggal_lahir(LocalDate.parse(rs.getString("tanggal_lahir")));
 //            usr.setTanggal_lahir(rs.getDate("tanggal_lahir"));
             usr.setTinggi_badan(rs.getDouble("tinggi_badan"));
+            usr.setStatus(rs.getString("status"));
         }
         return usr;
     }

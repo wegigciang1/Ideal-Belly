@@ -17,6 +17,20 @@ import javafx.beans.property.SimpleDoubleProperty;
 public class User {
 
     /**
+     * @return the status
+     */
+    public String getStatus() {
+        return status.get();
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(String status) {
+        this.status.set(status);
+    }
+
+    /**
      * @return the id
      */
     public int getId() {
@@ -105,4 +119,5 @@ public class User {
     private SimpleStringProperty password = new SimpleStringProperty();
     private LocalDate tanggal_lahir;
     private SimpleDoubleProperty tinggi_badan = new SimpleDoubleProperty();
+    private SimpleStringProperty status = new SimpleStringProperty();
 }

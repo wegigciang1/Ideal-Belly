@@ -168,24 +168,35 @@ public class EditProfileController implements Initializable {
     }
     
     @FXML
-    private void handleTipsLinkAction(ActionEvent event) throws IOException {
+    private void handleTipsLinkAction(ActionEvent event) throws Exception {
         System.out.println("Request Tips");
-        //Bagian Tips HyperLink
-        try{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Tips.fxml"));
-        Parent root= (Parent) loader.load();
         
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add("/styles/TipsStyles.css");
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-        window.setScene(scene);
-        window.show();
+        try{  
+            User userNow = UserSession.getUserSession();
+            if("admin".equals(userNow.getStatus())){
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/TipsAdmin.fxml"));
+            Parent root= (Parent) loader.load();
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add("/styles/TipsStyles.css");
+            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+            window.setScene(scene);
+            window.show();
+            }
+            else{
+              FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/TipsUser.fxml"));
+            Parent root= (Parent) loader.load();
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add("/styles/TipsStyles.css");
+            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+            window.setScene(scene);
+            window.show();  
+            }
         }
         catch(IOException e){
             System.out.println("Error Terjadi: " + e);
             throw e;
         }
+        
     }
 
     @Override

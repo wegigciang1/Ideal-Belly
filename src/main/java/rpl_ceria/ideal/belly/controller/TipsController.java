@@ -5,7 +5,6 @@
  */
 package rpl_ceria.ideal.belly.controller;
 
-import com.sun.prism.paint.Color;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -21,26 +20,18 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import rpl_ceria.ideal.belly.db.DaftarMakananDAO;
 
 import rpl_ceria.ideal.belly.model.DaftarMakanan;
+import rpl_ceria.ideal.belly.model.User;
+import rpl_ceria.ideal.belly.model.UserSession;
 
 /**
  * FXML Controller class
@@ -112,19 +103,31 @@ public class TipsController implements Initializable {
         window.show();
     }
     
-     @FXML
+ @FXML
     private void handleAktifitasTipsLinkAction(ActionEvent event) throws IOException {
         System.out.println("Request Tips");
         //Bagian Tips HyperLink
-        try{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AktifitasTips.fxml"));
-        Parent root= (Parent) loader.load();
-        
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add("/styles/TipsStyles.css");
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setScene(scene);
-        window.show();
+        try{  
+            User userNow = UserSession.getUserSession();
+            System.out.println(userNow.getStatus());
+            if("admin".equals(userNow.getStatus())){
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/AktifitasTipsAdmin.fxml"));
+            Parent root= (Parent) loader.load();
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add("/styles/TipsStyles.css");
+            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+            window.setScene(scene);
+            window.show();
+            }
+            else{
+              FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/AktifitasTipsUser.fxml"));
+            Parent root= (Parent) loader.load();
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add("/styles/TipsStyles.css");
+            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+            window.setScene(scene);
+            window.show();  
+            }
         }
         catch(IOException e){
             System.out.println("Error Terjadi: " + e);
@@ -193,7 +196,7 @@ public class TipsController implements Initializable {
          System.out.println("Request Tambah Makanan");
         //Bagian Tips HyperLink
         try{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/TambahMakananTips.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/TambahMakananTipsAdmin.fxml"));
         Parent root= (Parent) loader.load();
         
         Scene scene = new Scene(root);
