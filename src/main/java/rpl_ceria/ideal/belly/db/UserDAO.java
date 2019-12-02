@@ -19,8 +19,10 @@ public class UserDAO {
         String encodedPassword = Base64.getEncoder().encodeToString(usr.getPassword().getBytes());
         addStmt = addStmt.concat(encodedPassword + "','");
         addStmt = addStmt.concat(usr.getNama() + "','");
+        addStmt = addStmt.concat(usr.getJenis_kelamin() + "','");
         addStmt = addStmt.concat(usr.getTanggal_lahir().toString() + "',");
-        addStmt = addStmt.concat(usr.getTinggi_badan() + ")");
+        addStmt = addStmt.concat(usr.getTinggi_badan() + ",'");
+        addStmt = addStmt.concat(usr.getStatus() + "')");
         try{
             DBUtil.getInstance().dbExecuteQueryInsert(addStmt);
         }catch (SQLException e){

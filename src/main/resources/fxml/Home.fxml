@@ -9,6 +9,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="anchor_lvl1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rpl_ceria.ideal.belly.controller.HomeController">
@@ -21,12 +22,12 @@
                      <children>
                         <AnchorPane fx:id="anchor1" layoutX="204.0" prefHeight="53.0" prefWidth="397.0" style="-fx-background-color: ff914d;">
                            <children>
-                              <Hyperlink layoutX="60.0" layoutY="13.0" onAction="#handleTipsLinkAction" text="Tips" textFill="WHITE">
+                              <Hyperlink layoutX="130.0" layoutY="13.0" onAction="#handleTipsLinkAction" text="Tips" textFill="WHITE">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
                               </Hyperlink>
-                              <Hyperlink layoutX="120.0" layoutY="13.0" text="Home" textFill="WHITE">
+                              <Hyperlink layoutX="60.0" layoutY="13.0" text="Home" textFill="WHITE">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
@@ -60,7 +61,42 @@
                               <Font size="15.0" />
                            </font>
                         </Label>
-                        <Label fx:id="selamatDatang_label" layoutX="25.0" layoutY="40.0"/>
+                        <Label fx:id="selamatDatang_label" layoutX="25.0" layoutY="40.0" />
+                        <Label layoutX="25.0" layoutY="158.0" text="Berat Badan Saat Ini">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="25.0" layoutY="210.0" text="Rata-Rata Berat Badan">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="25.0" layoutY="262.0" text="Kategori BMI Hari Ini">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="bb_sekarang" layoutX="26.0" layoutY="178.0" text="100">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Line endX="100.0" layoutX="126.0" layoutY="200.0" startX="-100.0" />
+                        <Label fx:id="bb_rata2" layoutX="26.0" layoutY="230.0" text="100.6">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="bb_kategori" layoutX="26.0" layoutY="282.0" text="Kurus">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Line endX="100.0" layoutX="126.0" layoutY="250.0" startX="-100.0" />
+                        <Line endX="100.0" layoutX="126.0" layoutY="301.0" startX="-100.0" />
+                        <Label layoutX="202.0" layoutY="180.0" text="Kg" />
+                        <Label layoutX="202.0" layoutY="230.0" text="Kg" />
                      </children>
                   </AnchorPane>
                   <AnchorPane fx:id="bilah_kanan" layoutX="303.0" layoutY="6.0" prefHeight="335.0" prefWidth="291.0" style="-fx-background-color: white; -fx-border-radius: 4; -fx-background-radius: 4; -fx-padding: 8;">

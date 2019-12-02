@@ -19,6 +19,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -51,6 +52,10 @@ public class SignUpController implements Initializable {
     
     @FXML
     private TextField tinggi_badan;
+    @FXML
+    private ComboBox<String> gender;
+    @FXML
+    private ComboBox<String> status;
                   
     @FXML
     private void handleSignUpButtonAction(ActionEvent event) throws IOException, SQLException, ClassNotFoundException, ParseException {
@@ -111,13 +116,14 @@ public class SignUpController implements Initializable {
                 alert.showAndWait();
                 throw new IOException();
             }
-            
             User newuser = new User();
             newuser.setEmail(email.getText());
             newuser.setPassword(password.getText());
             newuser.setNama(nama.getText());
+            newuser.setJenis_kelamin(gender.getValue());
             newuser.setTanggal_lahir(tanggal_lahir.getValue());
             newuser.setTinggi_badan(Double.parseDouble(tinggi_badan.getText()));
+            newuser.setStatus(status.getValue());
             User user = UserDAO.searchUserByEmail(newuser.getEmail());
             if (user == null) {
                 UserDAO.addUser(newuser);
@@ -153,6 +159,13 @@ public class SignUpController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        // populate the fruit combo box with item choices.
+    gender.getItems().setAll("laki-laki","perempuan");
+    status.getItems().setAll("admin","user");
+    // bind the selected fruit label to the selected fruit in the combo box.
+    //selectedFruit.textProperty().bind(fruitCombo.getSelectionModel().selectedItemProperty());
+
+
     }    
     
 }

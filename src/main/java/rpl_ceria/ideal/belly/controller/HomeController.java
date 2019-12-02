@@ -35,6 +35,7 @@ import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Modality;
@@ -67,6 +68,26 @@ public class HomeController implements Initializable {
     
      @FXML
     private LineChart<String, Number> grafik;
+    @FXML
+    private AnchorPane anchor_lvl1;
+    @FXML
+    private AnchorPane anhcor_lvl2;
+    @FXML
+    private AnchorPane anchor_lvl3;
+    @FXML
+    private AnchorPane bilah_atas;
+    @FXML
+    private AnchorPane anchor1;
+    @FXML
+    private AnchorPane bilah_kiri;
+    @FXML
+    private Label bb_sekarang;
+    @FXML
+    private Label bb_rata2;
+    @FXML
+    private Label bb_kategori;
+    @FXML
+    private AnchorPane bilah_kanan;
     
     @FXML
     private void handleLogOutLinkAction(ActionEvent event) throws IOException {
@@ -96,7 +117,6 @@ public class HomeController implements Initializable {
         window.show();
     }
     
-    @FXML
     private void handleAddBodyWeightButtonAction(boolean isAdd, final BeratHarian brt) {
         System.out.println("Request Add Body Weight");
         
@@ -222,6 +242,8 @@ public class HomeController implements Initializable {
             rata2+=item.getBerat_badan();
         }
         int a = data.size();
+        bb_sekarang.setText(Double.toString(akhir));
+        bb_rata2.setText(Double.toString(rata2/a));
         System.out.println("Rata2: "+(rata2/a));
         System.out.println("Berat Sekarang: "+akhir);
         grafik.getData().add(series);    
@@ -246,6 +268,7 @@ public class HomeController implements Initializable {
                                 cek_beratharian.getBMI()));
                     }
                 //tambahan ciang new
+                
                 Parent root = FXMLLoader.load(getClass().getResource("/fxml/Home.fxml"));
                 Scene scene = new Scene(root);
                 scene.getStylesheets().add("/styles/HomeStyles.css");
