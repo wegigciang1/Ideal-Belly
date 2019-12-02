@@ -24,6 +24,7 @@ import rpl_ceria.ideal.belly.db.DaftarMakananDAO;
 import rpl_ceria.ideal.belly.model.DaftarMakanan;
 import rpl_ceria.ideal.belly.model.User;
 import rpl_ceria.ideal.belly.model.UserSession;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -188,10 +189,10 @@ public class TambahMakananTipsController {
                 else{
                     popupmessage = "Kalori harus angka";
                 }
-                flag = true;
-            }
-            else{
-                flag = false;
+//                flag = true;
+//            }
+//            else{
+//                flag = false;
             }
             //path_img masih dalam perbaikan
 //            if(Pattern.matches("[a-zA-Z]+", path_img.getText()) || Pattern.matches("[0-9]+", path_img.getText())){

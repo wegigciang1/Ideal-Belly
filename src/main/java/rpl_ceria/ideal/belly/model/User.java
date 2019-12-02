@@ -29,6 +29,20 @@ public class User {
     public void setStatus(String status) {
         this.status.set(status);
     }
+    
+    /**
+     * @return the jenis_kelamin
+     */
+    public String getJenis_kelamin() {
+        return jenis_kelamin.get();
+    }
+
+    /**
+     * @param jenis_kelamin the jenis_kelamin to set
+     */
+    public void setJenis_kelamin(String jenis_kelamin) {
+        this.jenis_kelamin.set(jenis_kelamin);
+    }
 
     /**
      * @return the id
@@ -120,4 +134,5 @@ public class User {
     private LocalDate tanggal_lahir;
     private SimpleDoubleProperty tinggi_badan = new SimpleDoubleProperty();
     private SimpleStringProperty status = new SimpleStringProperty();
+    private SimpleStringProperty jenis_kelamin = new SimpleStringProperty();
 }

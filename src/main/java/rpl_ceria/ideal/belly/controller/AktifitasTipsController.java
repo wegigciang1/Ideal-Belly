@@ -22,7 +22,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
@@ -165,14 +169,18 @@ public class AktifitasTipsController implements Initializable {
                 }
                         
                 // add detail data ke grid
-                Label nama_makanan = new Label(item.getAktifitas());
-                nama_makanan.setPrefWidth(190);
-                nama_makanan.setWrapText(true);
-                nama_makanan.setFont(Font.font("Arial", FontWeight.BOLD, 16));
-                grid.add(nama_makanan, 1, 0);
+                Label nama_aktifitas = new Label(item.getAktifitas());
+                nama_aktifitas.setPrefWidth(190);
+                nama_aktifitas.setWrapText(true);
+                nama_aktifitas.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, 17));
+                nama_aktifitas.setTextFill(Color.web("000033"));
+                nama_aktifitas.setBackground(new Background(new BackgroundFill(Color.web("#ffffff", 0.5), new CornerRadii(0), new Insets(0))));
+                grid.add(nama_aktifitas, 1, 0);
                 
-                Label jumlah_kalori = new Label("Kalori : " + String.valueOf(item.getKalori_terbakar()) + " / 30 menit");
-                jumlah_kalori.setFont(Font.font("Arial", FontWeight.MEDIUM, 14));
+                Label jumlah_kalori = new Label("Kalori : " + String.valueOf(item.getKalori_terbakar()) + " kal / 30 menit");
+                jumlah_kalori.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+                jumlah_kalori.setTextFill(Color.web("#000033"));
+                jumlah_kalori.setBackground(new Background(new BackgroundFill(Color.web("#ffffff", 0.5), new CornerRadii(0), new Insets(0))));
                 grid.add(jumlah_kalori, 1, 1);
                 
                 this.bilah_kanan.getChildren().addAll(grid);   

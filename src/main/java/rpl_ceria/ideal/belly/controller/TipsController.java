@@ -22,13 +22,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-
 import rpl_ceria.ideal.belly.db.DaftarMakananDAO;
-
 import rpl_ceria.ideal.belly.model.DaftarMakanan;
 import rpl_ceria.ideal.belly.model.User;
 import rpl_ceria.ideal.belly.model.UserSession;
@@ -80,6 +82,8 @@ public class TipsController implements Initializable {
         Parent root= (Parent) loader.load();
         
         Scene scene = new Scene(root);
+        
+        //menampilkan window
         scene.getStylesheets().add("/styles/Styles.css");
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
             
@@ -175,13 +179,15 @@ public class TipsController implements Initializable {
                 Label nama_makanan = new Label(item.getNama_makanan());
                 nama_makanan.setPrefWidth(190);
                 nama_makanan.setWrapText(true);
-                nama_makanan.setFont(Font.font("Arial", FontWeight.BOLD, 16));
-//                nama_makanan.setTextFill();
+                nama_makanan.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, 17));
+                nama_makanan.setTextFill(Color.web("#000033"));
+                nama_makanan.setBackground(new Background(new BackgroundFill(Color.web("#ffffff", 0.5), new CornerRadii(0), new Insets(0))));
                 grid.add(nama_makanan, 1, 0);
                 
-                Label jumlah_kalori = new Label("Kalori : " + String.valueOf(item.getKalori()));
-                jumlah_kalori.setFont(Font.font("Arial", FontWeight.MEDIUM, 14));
-
+                Label jumlah_kalori = new Label("Kalori : " + String.valueOf(item.getKalori()) + " kal");
+                jumlah_kalori.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+                jumlah_kalori.setTextFill(Color.web("#000033"));
+                jumlah_kalori.setBackground(new Background(new BackgroundFill(Color.web("#ffffff", 0.5), new CornerRadii(0), new Insets(0))));
                 grid.add(jumlah_kalori, 1, 1);
                 
                 this.bilah_kanan.getChildren().addAll(grid);   
