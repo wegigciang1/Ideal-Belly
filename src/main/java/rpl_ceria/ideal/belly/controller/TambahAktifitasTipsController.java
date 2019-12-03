@@ -25,12 +25,14 @@ import rpl_ceria.ideal.belly.model.DaftarMakanan;
 import rpl_ceria.ideal.belly.model.User;
 import rpl_ceria.ideal.belly.model.UserSession;
 import javax.imageio.ImageIO;
+import rpl_ceria.ideal.belly.db.DaftarAktifitasDAO;
+import rpl_ceria.ideal.belly.model.DaftarAktifitas;
 
 /**
  *
  * @author ciang
  */
-public class TambahMakananTipsController {
+public class TambahAktifitasTipsController {
 
     @FXML
     private AnchorPane anchor_lvl1;
@@ -47,15 +49,15 @@ public class TambahMakananTipsController {
     @FXML
     private AnchorPane bilah_kanan;
     @FXML
-    private TextField kalori;
+    private TextField nama_aktifitas;
     @FXML
-    private TextArea deskripsi;
-    @FXML
-    private Button button;
-    @FXML
-    private TextField nama_makanan;
+    private TextField kalori_terbakar;
     @FXML
     private TextField path_img;
+    @FXML
+    private Button button;
+
+   
 
     @FXML
     private void handleHomeLinkAction(ActionEvent event) throws IOException {
@@ -164,9 +166,9 @@ public class TambahMakananTipsController {
     }
 
     @FXML
-    private void handleTambahMakananButtonAction(ActionEvent event) {
+    private void handleTambahAktifitasButtonAction(ActionEvent event) {
          try{
-            if(nama_makanan.getText().isEmpty() || kalori.getText().isEmpty() || path_img.getText().isEmpty() || deskripsi.getText().isEmpty()){
+            if(nama_aktifitas.getText().isEmpty() || kalori_terbakar.getText().isEmpty() || path_img.getText().isEmpty()){
                 
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Invalid Registration");
@@ -178,11 +180,11 @@ public class TambahMakananTipsController {
             
             String popupmessage = "";
             boolean flag = false;
-            if(!Pattern.matches("[a-zA-Z ]+", nama_makanan.getText())){
-                popupmessage = "Nama makanan harus huruf";
+            if(!Pattern.matches("[a-zA-Z ]+", nama_aktifitas.getText())){
+                popupmessage = "Nama aktifitas harus huruf";
                 flag = true;
             }
-            if(!Pattern.matches("[0-9]+[\\.0-9]+", kalori.getText())){
+            if(!Pattern.matches("[0-9]+[\\.0-9]+", kalori_terbakar.getText())){
                 if(flag){
                     popupmessage = popupmessage + "\nKalori harus angka";
                 }
@@ -213,21 +215,21 @@ public class TambahMakananTipsController {
                 throw new IOException();
             }
             
-            DaftarMakanan newmakanan = new DaftarMakanan();
-            newmakanan.setNama_makanan(nama_makanan.getText());
-            newmakanan.setKalori(Double.parseDouble(kalori.getText()));
-            newmakanan.setPath_img(path_img.getText());
-            newmakanan.setDeskripsi(deskripsi.getText());
-            DaftarMakanan daftarmakanan = DaftarMakananDAO.searchMakananByName(newmakanan.getNama_makanan());
-            if (daftarmakanan == null) {
-                DaftarMakananDAO.addMakanan(newmakanan);
+            DaftarAktifitas newaktifitas = new DaftarAktifitas();
+            newaktifitas.setAktifitas(nama_aktifitas.getText());
+            newaktifitas.setKalori_terbakar(Integer.parseInt(kalori_terbakar.getText()));
+            newaktifitas.setPath_img(path_img.getText());
+            
+            DaftarAktifitas daftaraktifitas = DaftarAktifitasDAO.searchAktifitasByName(newaktifitas.getAktifitas());
+            if (daftaraktifitas == null) {
+                DaftarAktifitasDAO.addAktifitas(newaktifitas);
                 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Add Data Success");
                 alert.setHeaderText("Data Berhasil");
-                alert.setContentText("Makanan Berhasil Ditambahkan");
+                alert.setContentText("Aktifitas Berhasil Ditambahkan");
                 alert.showAndWait();
-                System.out.println("Data Makanan Berhasil");
+                System.out.println("Data Aktifitas Berhasil");
                 
                 Parent root = FXMLLoader.load(getClass().getResource("/fxml/TambahMakananTips.fxml"));
                 Scene scene = new Scene(root);
@@ -241,7 +243,7 @@ public class TambahMakananTipsController {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error Add Data");
                 alert.setHeaderText("Gagal Menambah Data");
-                alert.setContentText("Makanan gagal untuk dibuat");
+                alert.setContentText("Aktifitas gagal untuk dibuat");
                 alert.showAndWait();
             }
         }
@@ -250,11 +252,12 @@ public class TambahMakananTipsController {
         }
     }
 
-  
     @FXML
-    private void handleTambahAktifitasTipsLinkAction(ActionEvent event) throws IOException {
-          try{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/TambahAktifitasTipsAdmin.fxml"));
+    private void handleTambahItemTipsLinkAction(ActionEvent event) throws IOException {
+         System.out.println("Request Tambah Makanan");
+        //Bagian Tips HyperLink
+        try{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/TambahMakananTipsAdmin.fxml"));
         Parent root= (Parent) loader.load();
         
         Scene scene = new Scene(root);

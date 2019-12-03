@@ -216,4 +216,23 @@ public class TipsController implements Initializable {
             throw e;
         }
     }
+
+    @FXML
+    private void handleTambahAktifitasTipsLinkAction(ActionEvent event) throws IOException {
+         System.out.println("Tambah AKtifitas");
+        try{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/TambahAktifitasTipsAdmin.fxml"));
+        Parent root= (Parent) loader.load();
+        
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add("/styles/TambahAktifitasTipsStyles.css");
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(scene);
+        window.show();
+        }
+        catch(IOException e){
+            System.out.println("Error Terjadi: " + e);
+            throw e;
+        }
+    }
 }

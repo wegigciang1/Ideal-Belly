@@ -61,11 +61,6 @@
                               <Font size="15.0" />
                            </font>
                         </Hyperlink>
-                        <Hyperlink layoutX="16.0" layoutY="118.0" prefHeight="27.0" prefWidth="114.0" text="Tambah Item" textFill="WHITE">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Hyperlink>
                      </children>
                   </AnchorPane>
                   <AnchorPane fx:id="bilah_kanan" layoutX="155.0" layoutY="6.0" prefHeight="335.0" prefWidth="441.0" style="-fx-background-color: white; -fx-border-radius: 4; -fx-background-radius: 4; -fx-padding: 8;">
@@ -87,6 +82,16 @@
                         <Button layoutX="149.0" layoutY="155.0" mnemonicParsing="false" text="Browse" textFill="WHITE" />
                      </children>
                   </AnchorPane>
+                  <Hyperlink layoutX="14.0" layoutY="118.0" prefHeight="27.0" prefWidth="126.0" text="Tambah Makan" textFill="WHITE">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Hyperlink>
+                  <Hyperlink layoutX="8.0" layoutY="160.0" onAction="#handleTambahAktifitasTipsLinkAction" prefHeight="27.0" prefWidth="138.0" text="Tambah Aktifitas" textFill="WHITE">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Hyperlink>
                </children>
             </AnchorPane>
          </children>

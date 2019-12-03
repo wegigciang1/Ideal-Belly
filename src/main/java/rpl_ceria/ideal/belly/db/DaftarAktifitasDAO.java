@@ -42,6 +42,18 @@ public class DaftarAktifitasDAO {
         }
         return akt;
     }
+    //iterasi 3
+    public static DaftarAktifitas searchAktifitasByName(String nama_aktifitas) throws SQLException, ClassNotFoundException {
+        String selectStmt = "SELECT * FROM  daftarMakanan WHERE ktifitas='" + nama_aktifitas + "'";
+        try {
+            ResultSet rsAkt = DBUtil.getInstance().dbExecuteQuery(selectStmt);
+            DaftarAktifitas akt = getAktifitasFromResultSet(rsAkt);
+            return akt;
+        } catch (SQLException e) {
+            System.out.println("Sedang mencari makanan dengan nama " + nama_aktifitas + ", error terjadi: " + e);
+            throw e;
+        }
+    }
 
     public static ObservableList<DaftarAktifitas> searchAktifitass() throws SQLException, ClassNotFoundException {
         String selectStmt = "SELECT * FROM aktivitas";
