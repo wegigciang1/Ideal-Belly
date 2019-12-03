@@ -5,6 +5,7 @@
  */
 package rpl_ceria.ideal.belly.model;
 
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -13,6 +14,20 @@ import javafx.beans.property.SimpleStringProperty;
  * @author ciang
  */
 public class DaftarAktifitas{
+
+    /**
+     * @return the deskripsi
+     */
+    public String getDeskripsi() {
+        return deskripsi.get();
+    }
+
+    /**
+     * @param deskripsi the deskripsi to set
+     */
+    public void setDeskripsi(String deskripsi) {
+        this.deskripsi.set(deskripsi);
+    }
 
     /**
      * @return the id
@@ -45,14 +60,14 @@ public class DaftarAktifitas{
     /**
      * @return the kalori_terbakar
      */
-    public int getKalori_terbakar() {
+    public double getKalori_terbakar() {
         return kalori_terbakar.get();
     }
 
     /**
      * @param kalori_terbakar the kalori_terbakar to set
      */
-    public void setKalori_terbakar(int kalori_terbakar) {
+    public void setKalori_terbakar(double kalori_terbakar) {
         this.kalori_terbakar.set(kalori_terbakar);
     }
         
@@ -72,7 +87,8 @@ public class DaftarAktifitas{
         
     private SimpleIntegerProperty id= new SimpleIntegerProperty();
     private SimpleStringProperty aktifitas= new SimpleStringProperty();
-    private SimpleIntegerProperty kalori_terbakar= new SimpleIntegerProperty();
+    private SimpleDoubleProperty kalori_terbakar= new SimpleDoubleProperty();
+    private SimpleStringProperty deskripsi= new SimpleStringProperty();
     private SimpleStringProperty path_img= new SimpleStringProperty();
     
 }

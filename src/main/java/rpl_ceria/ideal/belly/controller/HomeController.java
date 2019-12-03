@@ -9,7 +9,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.ZoneId;
+import java.util.Comparator;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -42,7 +44,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import rpl_ceria.ideal.belly.model.BeratHarian;
 import rpl_ceria.ideal.belly.db.BeratHarianDAO;
-import rpl_ceria.ideal.belly.model.BMI;
+import rpl_ceria.ideal.belly.model.CountUserBody;
 import rpl_ceria.ideal.belly.model.UserSession;
 import rpl_ceria.ideal.belly.model.User;
 
@@ -152,7 +154,7 @@ public class HomeController implements Initializable {
                                 throw new Exception("Invalid Input");
                             }
                             User userNow = UserSession.getUserSession();
-                            brtUpdated.setBMI(BMI.countBMI(userNow.getTinggi_badan(), brtUpdated.getBerat_badan()));
+                            brtUpdated.setBMI(CountUserBody.countBMI(userNow.getTinggi_badan(), brtUpdated.getBerat_badan()));
                             BeratHarianDAO.addBeratHarian(brtUpdated);
                         } catch (SQLException | ClassNotFoundException ex) {
                             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
@@ -168,7 +170,7 @@ public class HomeController implements Initializable {
                         BeratHarian brtUpdated = brtController.getBeratHarian();
                         try {
                             User userNow = UserSession.getUserSession();
-                            brtUpdated.setBMI(BMI.countBMI(userNow.getTinggi_badan(), brtUpdated.getBerat_badan()));
+                            brtUpdated.setBMI(CountUserBody.countBMI(userNow.getTinggi_badan(), brtUpdated.getBerat_badan()));
                             BeratHarianDAO.updateBeratHarian(emailOld, brtUpdated);
                         } catch (SQLException | ClassNotFoundException ex) {
                             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
@@ -190,22 +192,22 @@ public class HomeController implements Initializable {
             
             System.out.println(userNow.getStatus());
             if("admin".equals(userNow.getStatus())){
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/TipsAdmin.fxml"));
-            Parent root= (Parent) loader.load();
-            Scene scene = new Scene(root);
-            scene.getStylesheets().add("/styles/TipsStyles.css");
-            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-            window.setScene(scene);
-            window.show();
+                FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/TipsAdmin.fxml"));
+                Parent root = (Parent) loader.load();
+                Scene scene = new Scene(root);
+                scene.getStylesheets().add("/styles/TipsStyles.css");
+                Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+                window.setScene(scene);
+                window.show();
             }
             else{
-              FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/TipsUser.fxml"));
-            Parent root= (Parent) loader.load();
-            Scene scene = new Scene(root);
-            scene.getStylesheets().add("/styles/TipsStyles.css");
-            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-            window.setScene(scene);
-            window.show();  
+                FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/TipsUser.fxml"));
+                Parent root= (Parent) loader.load();
+                Scene scene = new Scene(root);
+                scene.getStylesheets().add("/styles/TipsStyles.css");
+                Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+                window.setScene(scene);
+                window.show();
             }
         }
         catch(IOException e){
@@ -223,30 +225,59 @@ public class HomeController implements Initializable {
         selamatDatang_label.setFont(Font.font("Arial", FontWeight.BOLD, 18));
         selamatDatang_label.setWrapText(true);
         
-         try {//linechart
+        try {//linechart
             double rata2 = 0;
             double akhir = 0;
-        final CategoryAxis xAxis = new CategoryAxis();
-        final NumberAxis yAxis = new NumberAxis();   
-        ObservableList<BeratHarian> data;
-        String emailNew= userNow.getEmail();
-        data = BeratHarianDAO.searchBeratHarianEmails(emailNew);
-        final LineChart<String,Number> lineChart;
+            final CategoryAxis xAxis = new CategoryAxis();
+            final NumberAxis yAxis = new NumberAxis();   
+            ObservableList<BeratHarian> data;
+            String emailNew= userNow.getEmail();
+            data = BeratHarianDAO.searchBeratHarianEmails(emailNew);
+            System.out.println("Date awal: " + data.get(0).getTanggal_harian().plusDays(1));
+            for(int i = 1; i < data.size(); i++){
+                if(data.get(i).getTanggal_harian() != data.get(i-1).getTanggal_harian().plusDays(1)){
+                    int days = Period.between(data.get(i-1).getTanggal_harian(), data.get(i).getTanggal_harian()).getDays();
+                    for(int j = 0; j < days-1; j++){
+                        BeratHarian brtNew = data.get(i-1);
+                        data.get(i-1).setTanggal_harian(brtNew.getTanggal_harian().plusDays(1));
+                        BeratHarianDAO.addBeratHarian(brtNew);
+                    }
+                }
+            }
+            int days = Period.between(data.get(data.size()-1).getTanggal_harian(), LocalDate.now(ZoneId.systemDefault())).getDays();
+            if(days > 1){
+                for(int i = 0; i < days-1; i++){
+                    BeratHarian brtNew = data.get(data.size()-1);
+                    data.get(data.size()-1).setTanggal_harian(brtNew.getTanggal_harian().plusDays(1));
+                    BeratHarianDAO.addBeratHarian(brtNew);
+                }
+            }
+            
+            final LineChart<String,Number> lineChart;
             lineChart = new LineChart<>(xAxis,yAxis);
                                    
-        XYChart.Series series = new XYChart.Series();
-        series.setName("Berat Harian");
-        for(BeratHarian item : data){
-            series.getData().add(new XYChart.Data<>(item.getTanggal_harian().toString(), item.getBerat_badan()));
-            akhir=item.getBerat_badan();
-            rata2+=item.getBerat_badan();
-        }
-        int a = data.size();
-        bb_sekarang.setText(Double.toString(akhir));
-        bb_rata2.setText(Double.toString(rata2/a));
-        System.out.println("Rata2: "+(rata2/a));
-        System.out.println("Berat Sekarang: "+akhir);
-        grafik.getData().add(series);    
+            XYChart.Series series = new XYChart.Series();
+            series.setName("Berat Harian");
+            data = BeratHarianDAO.searchBeratHarianEmails(emailNew);
+            for(BeratHarian item : data){
+                series.getData().add(new XYChart.Data<>(item.getTanggal_harian().toString(), item.getBerat_badan()));
+                akhir=item.getBerat_badan();
+                rata2+=item.getBerat_badan();
+            }
+            int a = data.size();
+            bb_sekarang.setText(Double.toString(akhir));
+            bb_rata2.setText(Double.toString(rata2/a));
+            System.out.println("Rata2: "+(rata2/a));
+            System.out.println("Berat Sekarang: "+akhir);
+            BeratHarian cek_beratharian = BeratHarianDAO.searchBeratHarianByEmailAndDate(userNow.getEmail(), LocalDate.now(ZoneId.systemDefault()));
+            if(cek_beratharian != null){    
+                bb_kategori.setText(CountUserBody.getStatusBMI(cek_beratharian.getBMI()));
+            }
+            else{
+                cek_beratharian = BeratHarianDAO.searchBeratHarianByEmailAndDate(userNow.getEmail(), LocalDate.now(ZoneId.systemDefault()).minusDays(1));
+                bb_kategori.setText(CountUserBody.getStatusBMI(cek_beratharian.getBMI()));
+            }
+            grafik.getData().add(series);    
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
         }

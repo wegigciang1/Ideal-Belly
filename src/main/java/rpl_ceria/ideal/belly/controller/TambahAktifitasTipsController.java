@@ -1,13 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package rpl_ceria.ideal.belly.controller;
 
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.regex.Pattern;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,85 +10,68 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import rpl_ceria.ideal.belly.db.DaftarMakananDAO;
-import rpl_ceria.ideal.belly.model.DaftarMakanan;
-import rpl_ceria.ideal.belly.model.User;
-import rpl_ceria.ideal.belly.model.UserSession;
-import javax.imageio.ImageIO;
 import rpl_ceria.ideal.belly.db.DaftarAktifitasDAO;
 import rpl_ceria.ideal.belly.model.DaftarAktifitas;
+import rpl_ceria.ideal.belly.model.User;
+import rpl_ceria.ideal.belly.model.UserSession;
 
-/**
- *
- * @author ciang
- */
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.regex.Pattern;
+
 public class TambahAktifitasTipsController {
-
     @FXML
-    private AnchorPane anchor_lvl1;
+    private TextField kalori;
     @FXML
-    private AnchorPane anhcor_lvl2;
-    @FXML
-    private AnchorPane anchor_lvl3;
-    @FXML
-    private AnchorPane bilah_atas;
-    @FXML
-    private AnchorPane anchor1;
-    @FXML
-    private AnchorPane bilah_kiri;
-    @FXML
-    private AnchorPane bilah_kanan;
+    private TextArea deskripsi;
     @FXML
     private TextField nama_aktifitas;
     @FXML
-    private TextField kalori_terbakar;
-    @FXML
     private TextField path_img;
     @FXML
-    private Button button;
-
-   
-
+    private Button save;
+    @FXML
+    private Button browse;
+        
     @FXML
     private void handleHomeLinkAction(ActionEvent event) throws IOException {
-         System.out.println("Request Home");
-        
+        System.out.println("Request Home");
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Home.fxml"));
         Parent root= (Parent) loader.load();
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/styles/HomeStyles.css");
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 //        HomeController home=loader.getController();
-//        home.tambah(userTamp); 
+//        home.tambah(userTamp);
         window.setScene(scene);
         window.show();
     }
 
     @FXML
     private void handleEditProfileLinkAction(ActionEvent event) throws IOException {
-          System.out.println("Request Edit Profile");
+        System.out.println("Request Edit Profile");
         FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/EditProfile.fxml"));
         Parent root= (Parent) loader.load();
-        
+
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/styles/Styles.css");
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-            
+
         window.setScene(scene);
         window.show();
     }
 
     @FXML
     private void handleLogOutLinkAction(ActionEvent event) throws IOException {
-       System.out.println("Request Log Out");
-        
+        System.out.println("Request Log Out");
+
         Parent root= FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/styles/LoginStyles.css");
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-            
+
         window.setScene(scene);
         window.show();
     }
@@ -105,26 +80,26 @@ public class TambahAktifitasTipsController {
     private void handleAktifitasTipsLinkAction(ActionEvent event) throws IOException {
         System.out.println("Request Tips");
         //Bagian Tips HyperLink
-        try{  
+        try{
             User userNow = UserSession.getUserSession();
             System.out.println(userNow.getStatus());
             if("admin".equals(userNow.getStatus())){
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/AktifitasTipsAdmin.fxml"));
-            Parent root= (Parent) loader.load();
-            Scene scene = new Scene(root);
-            scene.getStylesheets().add("/styles/TipsStyles.css");
-            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-            window.setScene(scene);
-            window.show();
+                FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/AktifitasTipsAdmin.fxml"));
+                Parent root= (Parent) loader.load();
+                Scene scene = new Scene(root);
+                scene.getStylesheets().add("/styles/TipsStyles.css");
+                Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+                window.setScene(scene);
+                window.show();
             }
             else{
-              FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/AktifitasTipsUser.fxml"));
-            Parent root= (Parent) loader.load();
-            Scene scene = new Scene(root);
-            scene.getStylesheets().add("/styles/TipsStyles.css");
-            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-            window.setScene(scene);
-            window.show();  
+                FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/AktifitasTipsUser.fxml"));
+                Parent root= (Parent) loader.load();
+                Scene scene = new Scene(root);
+                scene.getStylesheets().add("/styles/TipsStyles.css");
+                Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+                window.setScene(scene);
+                window.show();
             }
         }
         catch(IOException e){
@@ -136,40 +111,40 @@ public class TambahAktifitasTipsController {
     @FXML
     private void handleTipsLinkAction(ActionEvent event) throws Exception {
         System.out.println("Request Tips");
-        
-        try{  
+
+        try{
             User userNow = UserSession.getUserSession();
             if("admin".equals(userNow.getStatus())){
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/TipsAdmin.fxml"));
-            Parent root= (Parent) loader.load();
-            Scene scene = new Scene(root);
-            scene.getStylesheets().add("/styles/TipsStyles.css");
-            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-            window.setScene(scene);
-            window.show();
+                FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/TipsAdmin.fxml"));
+                Parent root= (Parent) loader.load();
+                Scene scene = new Scene(root);
+                scene.getStylesheets().add("/styles/TipsStyles.css");
+                Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+                window.setScene(scene);
+                window.show();
             }
             else{
-              FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/TipsUser.fxml"));
-            Parent root= (Parent) loader.load();
-            Scene scene = new Scene(root);
-            scene.getStylesheets().add("/styles/TipsStyles.css");
-            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-            window.setScene(scene);
-            window.show();  
+                FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/TipsUser.fxml"));
+                Parent root= (Parent) loader.load();
+                Scene scene = new Scene(root);
+                scene.getStylesheets().add("/styles/TipsStyles.css");
+                Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+                window.setScene(scene);
+                window.show();
             }
         }
         catch(IOException e){
             System.out.println("Error Terjadi: " + e);
             throw e;
         }
-        
+
     }
 
     @FXML
     private void handleTambahAktifitasButtonAction(ActionEvent event) {
-         try{
-            if(nama_aktifitas.getText().isEmpty() || kalori_terbakar.getText().isEmpty() || path_img.getText().isEmpty()){
-                
+        try{
+            if(nama_aktifitas.getText().isEmpty() || kalori.getText().isEmpty() || path_img.getText().isEmpty() || deskripsi.getText().isEmpty()){
+
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Invalid Registration");
                 alert.setHeaderText("Wajib Mengisi Semua Data");
@@ -177,14 +152,14 @@ public class TambahAktifitasTipsController {
                 alert.showAndWait();
                 throw new IOException();
             }
-            
+
             String popupmessage = "";
             boolean flag = false;
             if(!Pattern.matches("[a-zA-Z ]+", nama_aktifitas.getText())){
                 popupmessage = "Nama aktifitas harus huruf";
                 flag = true;
             }
-            if(!Pattern.matches("[0-9]+[\\.0-9]+", kalori_terbakar.getText())){
+            if(!Pattern.matches("[0-9]+[\\.0-9]+", kalori.getText())){
                 if(flag){
                     popupmessage = popupmessage + "\nKalori harus angka";
                 }
@@ -206,7 +181,7 @@ public class TambahAktifitasTipsController {
 //                }
 //                flag = true;
 //            }
-            if(popupmessage != ""){
+            if(!popupmessage.equals("")){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Invalid Input");
                 alert.setHeaderText("Pengisian Tidak Benar");
@@ -214,23 +189,24 @@ public class TambahAktifitasTipsController {
                 alert.showAndWait();
                 throw new IOException();
             }
-            
+
             DaftarAktifitas newaktifitas = new DaftarAktifitas();
             newaktifitas.setAktifitas(nama_aktifitas.getText());
-            newaktifitas.setKalori_terbakar(Integer.parseInt(kalori_terbakar.getText()));
+            newaktifitas.setKalori_terbakar(Double.parseDouble(kalori.getText()));
             newaktifitas.setPath_img(path_img.getText());
-            
-            DaftarAktifitas daftaraktifitas = DaftarAktifitasDAO.searchAktifitasByName(newaktifitas.getAktifitas());
-            if (daftaraktifitas == null) {
+            newaktifitas.setDeskripsi(deskripsi.getText());
+            DaftarAktifitas daftarAktifitas = DaftarAktifitasDAO.searchAktifitasByName(newaktifitas.getAktifitas());
+            if (daftarAktifitas == null) {
                 DaftarAktifitasDAO.addAktifitas(newaktifitas);
-                
+
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Add Data Success");
                 alert.setHeaderText("Data Berhasil");
                 alert.setContentText("Aktifitas Berhasil Ditambahkan");
                 alert.showAndWait();
                 System.out.println("Data Aktifitas Berhasil");
-                
+
+                //CHECK HERE
                 Parent root = FXMLLoader.load(getClass().getResource("/fxml/TambahMakananTips.fxml"));
                 Scene scene = new Scene(root);
                 scene.getStylesheets().add("/styles/TambahMakananTipsStyles.css");
@@ -239,7 +215,7 @@ public class TambahAktifitasTipsController {
                 window.setScene(scene);
                 window.show();
             } else {
-                
+
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error Add Data");
                 alert.setHeaderText("Gagal Menambah Data");
@@ -251,25 +227,4 @@ public class TambahAktifitasTipsController {
             System.out.println("Error di: " + e);
         }
     }
-
-    @FXML
-    private void handleTambahItemTipsLinkAction(ActionEvent event) throws IOException {
-         System.out.println("Request Tambah Makanan");
-        //Bagian Tips HyperLink
-        try{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/TambahMakananTipsAdmin.fxml"));
-        Parent root= (Parent) loader.load();
-        
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add("/styles/TambahMakananTipsStyles.css");
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setScene(scene);
-        window.show();
-        }
-        catch(IOException e){
-            System.out.println("Error Terjadi: " + e);
-            throw e;
-        }
-    }
-    
 }

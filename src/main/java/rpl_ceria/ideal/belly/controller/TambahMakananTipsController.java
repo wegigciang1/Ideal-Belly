@@ -19,7 +19,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import rpl_ceria.ideal.belly.db.DaftarMakananDAO;
 import rpl_ceria.ideal.belly.model.DaftarMakanan;
 import rpl_ceria.ideal.belly.model.User;
@@ -33,29 +35,17 @@ import javax.imageio.ImageIO;
 public class TambahMakananTipsController {
 
     @FXML
-    private AnchorPane anchor_lvl1;
-    @FXML
-    private AnchorPane anhcor_lvl2;
-    @FXML
-    private AnchorPane anchor_lvl3;
-    @FXML
-    private AnchorPane bilah_atas;
-    @FXML
-    private AnchorPane anchor1;
-    @FXML
-    private AnchorPane bilah_kiri;
-    @FXML
-    private AnchorPane bilah_kanan;
-    @FXML
     private TextField kalori;
     @FXML
     private TextArea deskripsi;
     @FXML
-    private Button button;
-    @FXML
     private TextField nama_makanan;
     @FXML
     private TextField path_img;
+    @FXML
+    private Button save;
+    @FXML
+    private Button browse;
 
     @FXML
     private void handleHomeLinkAction(ActionEvent event) throws IOException {
@@ -162,7 +152,14 @@ public class TambahMakananTipsController {
         }
         
     }
-
+    
+    @FXML
+    private void handleBrowseImageButtonAction(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Resource File");
+//        fileChooser.showOpenDialog(stage);s
+    }
+    
     @FXML
     private void handleTambahMakananButtonAction(ActionEvent event) {
          try{
@@ -195,16 +192,7 @@ public class TambahMakananTipsController {
 //                flag = false;
             }
             //path_img masih dalam perbaikan
-//            if(Pattern.matches("[a-zA-Z]+", path_img.getText()) || Pattern.matches("[0-9]+", path_img.getText())){
-//                if(flag){
-//                    popupmessage = popupmessage + "\nPassword harus angka & huruf min 8 karakter";
-//                }
-//                else{
-//                    popupmessage = "Password harus angka & huruf min 8 karakter";
-//                }
-//                flag = true;
-//            }
-            if(popupmessage != ""){
+            if(!popupmessage.equals("")){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Invalid Input");
                 alert.setHeaderText("Pengisian Tidak Benar");

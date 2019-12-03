@@ -8,6 +8,9 @@ package rpl_ceria.ideal.belly.controller;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,7 +33,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import rpl_ceria.ideal.belly.db.BeratHarianDAO;
 import rpl_ceria.ideal.belly.db.DaftarAktifitasDAO;
+import rpl_ceria.ideal.belly.model.BeratHarian;
+import rpl_ceria.ideal.belly.model.CountUserBody;
 import rpl_ceria.ideal.belly.model.DaftarAktifitas;
 import rpl_ceria.ideal.belly.model.User;
 import rpl_ceria.ideal.belly.model.UserSession;
@@ -143,8 +149,24 @@ public class AktifitasTipsController implements Initializable {
             title_tipsmakanan.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, 18));
             this.bilah_kanan.getChildren().addAll(title_tipsmakanan);
             
+            User userNow = UserSession.getUserSession();
+            BeratHarian cek_beratharian = BeratHarianDAO.searchBeratHarianByEmailAndDate(userNow.getEmail(), LocalDate.now(ZoneId.systemDefault()));
+            String levelAktifitasFisik = "tidak aktif";
+            double userUmur, userBMR, userTEE;
+            if(cek_beratharian != null){
+                userUmur = Period.between(userNow.getTanggal_lahir(), LocalDate.now(ZoneId.systemDefault())).getYears();
+                userBMR = CountUserBody.countBMR(userNow.getTinggi_badan(), cek_beratharian.getBerat_badan(), userUmur, userNow.getJenis_kelamin());
+                userTEE = CountUserBody.countTEE(userBMR, levelAktifitasFisik);
+            }
+            else{
+                cek_beratharian = BeratHarianDAO.searchBeratHarianByEmailAndDate(userNow.getEmail(), LocalDate.now(ZoneId.systemDefault()).minusDays(1));
+                userUmur = Period.between(userNow.getTanggal_lahir(), LocalDate.now(ZoneId.systemDefault())).getYears();
+                userBMR = CountUserBody.countBMR(userNow.getTinggi_badan(), cek_beratharian.getBerat_badan(), userUmur, userNow.getJenis_kelamin());
+                userTEE = CountUserBody.countTEE(userBMR, levelAktifitasFisik);
+            }
+            
             ObservableList<DaftarAktifitas> data;
-            data = DaftarAktifitasDAO.searchAktifitass();
+            data = DaftarAktifitasDAO.searchAktifitass(userTEE);
             // GridPane untuk setiap data tips
             double layoutX = 16.0, layoutY = 50.0;
             int gridColumns = 0;

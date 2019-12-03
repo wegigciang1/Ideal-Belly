@@ -52,12 +52,13 @@ public class DaftarMakananDAO {
             mkn.setNama_makanan(rs.getString("nama_makanan"));
             mkn.setKalori(rs.getDouble("kalori"));
             mkn.setDeskripsi(rs.getString("deskripsi"));
+            mkn.setPath_img(rs.getString("path_img"));
         }
         return mkn;
     }
 
-    public static ObservableList<DaftarMakanan> searchMakanans() throws SQLException, ClassNotFoundException {
-        String selectStmt = "SELECT * FROM daftarMakanan";
+    public static ObservableList<DaftarMakanan> searchMakanans(double tee) throws SQLException, ClassNotFoundException {
+        String selectStmt = "SELECT * FROM daftarMakanan WHERE kalori<='" + tee + "'";
         try {
             ResultSet rsMkn = DBUtil.getInstance().dbExecuteQuery(selectStmt);
             ObservableList<DaftarMakanan> newList;
@@ -84,7 +85,7 @@ public class DaftarMakananDAO {
         Random rand = new Random(); 
 		// create a temporary list for storing 
 		// selected element 
-                //untuk menentukan mau brp banyak yang di random
+                // untuk menentukan mau brp banyak yang di random
                 int jumlah_random= 4;
 		ObservableList<DaftarMakanan> newList = FXCollections.observableArrayList(); 
 		for (int i = 0; i < jumlah_random; i++) { 

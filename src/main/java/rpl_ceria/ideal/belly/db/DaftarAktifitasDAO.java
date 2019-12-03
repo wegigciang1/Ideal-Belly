@@ -31,18 +31,7 @@ public class DaftarAktifitasDAO {
         }
     }
 
-    private static DaftarAktifitas getAktifitasFromResultSet(ResultSet rs) throws SQLException {
-        DaftarAktifitas akt = null;
-        if (rs.next()) {
-            akt = new DaftarAktifitas();
-            akt.setId(rs.getInt("id"));
-            akt.setAktifitas(rs.getString("aktifitas"));
-            akt.setKalori_terbakar(rs.getInt("kalori_terbakar"));
-            akt.setPath_img(rs.getString("path_img"));
-        }
-        return akt;
-    }
-    //iterasi 3
+    //Tambahan Iterasi3
     public static DaftarAktifitas searchAktifitasByName(String nama_aktifitas) throws SQLException, ClassNotFoundException {
         String selectStmt = "SELECT * FROM  aktivitas WHERE aktifitas='" + nama_aktifitas + "'";
         try {
@@ -50,13 +39,26 @@ public class DaftarAktifitasDAO {
             DaftarAktifitas akt = getAktifitasFromResultSet(rsAkt);
             return akt;
         } catch (SQLException e) {
-            System.out.println("Sedang mencari aktifitas dengan nama " + nama_aktifitas + ", error terjadi: " + e);
+            System.out.println("Sedang mencari makanan dengan nama " + nama_aktifitas + ", error terjadi: " + e);
             throw e;
         }
     }
 
-    public static ObservableList<DaftarAktifitas> searchAktifitass() throws SQLException, ClassNotFoundException {
-        String selectStmt = "SELECT * FROM aktivitas";
+    private static DaftarAktifitas getAktifitasFromResultSet(ResultSet rs) throws SQLException {
+        DaftarAktifitas akt = null;
+        if (rs.next()) {
+            akt = new DaftarAktifitas();
+            akt.setId(rs.getInt("id"));
+            akt.setAktifitas(rs.getString("aktifitas"));
+            akt.setKalori_terbakar(rs.getDouble("kalori_terbakar"));
+            akt.setPath_img(rs.getString("path_img"));
+            akt.setDeskripsi(rs.getString("deskripsi"));
+        }
+        return akt;
+    }
+
+    public static ObservableList<DaftarAktifitas> searchAktifitass(double tee) throws SQLException, ClassNotFoundException {
+        String selectStmt = "SELECT * FROM aktivitas WHERE kalori_terbakar<='" + tee + "'";
         try {
             ResultSet rsAkt = DBUtil.getInstance().dbExecuteQuery(selectStmt);
             ObservableList<DaftarAktifitas> aktList;
@@ -74,8 +76,9 @@ public class DaftarAktifitasDAO {
             DaftarAktifitas akt = new DaftarAktifitas();
             akt.setId(rs.getInt("id"));
             akt.setAktifitas(rs.getString("aktifitas"));
-            akt.setKalori_terbakar(rs.getInt("kalori_terbakar"));
+            akt.setKalori_terbakar(rs.getDouble("kalori_terbakar"));
             akt.setPath_img(rs.getString("path_img"));
+            akt.setDeskripsi(rs.getString("deskripsi"));
             
             aktList.add(akt);
         }
@@ -103,7 +106,8 @@ public class DaftarAktifitasDAO {
         String updateStmt = "UPDATE aktivitas SET id='" + akt.getId() + "',"
                 + "nama = '" + akt.getAktifitas() + "',"
                 + "jenis = '" + akt.getKalori_terbakar() + "',"
-                + "path_img = '" + akt.getPath_img() + "' WHERE id='" + id + "'";
+                + "path_img = '" + akt.getPath_img() + "',"
+                + "deskripsi = '" + akt.getDeskripsi() + "' WHERE id='" + id + "'";
         try {
             DBUtil.getInstance().dbExecuteUpdate(updateStmt);
         } catch (SQLException e) {
@@ -115,7 +119,8 @@ public class DaftarAktifitasDAO {
         String updateStmt = "INSERT INTO aktivitas (id, aktifitas, kalori_terbakar, path_img) VALUES (null, '"
                 + akt.getAktifitas() + "',"
                 + akt.getKalori_terbakar() + ",'"
-                + akt.getPath_img() + "')";
+                + akt.getPath_img() + ",'"
+                + akt.getDeskripsi() + "')";
         try {
             DBUtil.getInstance().dbExecuteUpdate(updateStmt);
         } catch (SQLException e) {

@@ -1,7 +1,7 @@
 package rpl_ceria.ideal.belly.db;
 
 import rpl_ceria.ideal.belly.model.BeratHarian;
-import rpl_ceria.ideal.belly.model.BMI;
+import rpl_ceria.ideal.belly.model.CountUserBody;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -67,7 +67,7 @@ public class BeratHarianDAO {
     
     //tambahan iterasi 3
     public static ObservableList<BeratHarian> searchBeratHarianEmails(String email) throws SQLException, ClassNotFoundException {
-        String selectStmt = "SELECT * FROM berat_harian WHERE email='" + email + "'";
+        String selectStmt = "SELECT * FROM berat_harian WHERE email='" + email + "' ORDER BY tanggal_harian ASC";
         try {
             ResultSet rsBrt = DBUtil.getInstance().dbExecuteQuery(selectStmt);
             ObservableList<BeratHarian> brtList = getBeratHarianList(rsBrt);

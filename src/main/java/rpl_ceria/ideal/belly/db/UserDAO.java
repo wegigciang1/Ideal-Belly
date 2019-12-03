@@ -68,6 +68,7 @@ public class UserDAO {
             String decodedPassword = new String(decodedBytes);
             usr.setPassword(decodedPassword);
             usr.setNama(rs.getString("nama"));
+            usr.setJenis_kelamin(rs.getString("jenis_kelamin"));
             usr.setTanggal_lahir(LocalDate.parse(rs.getString("tanggal_lahir")));
 //            usr.setTanggal_lahir(rs.getDate("tanggal_lahir"));
             usr.setTinggi_badan(rs.getDouble("tinggi_badan"));
@@ -81,15 +82,14 @@ public class UserDAO {
         updateStmt = !usr.getEmail().equals("") ? 
                 updateStmt.concat(" email='" + usr.getEmail() + "',") 
                 : updateStmt;
-        
+        String encodedPassword = Base64.getEncoder().encodeToString(usr.getPassword().getBytes());
+        updateStmt = updateStmt.concat(" password='" + encodedPassword + "',");
         updateStmt = !usr.getNama().equals("") ? 
                 updateStmt.concat(" nama='" + usr.getNama() + "',") 
                 : updateStmt;
-        String encodedPassword = Base64.getEncoder().encodeToString(usr.getPassword().getBytes());
-        updateStmt = updateStmt.concat(" password='" + encodedPassword + "',");
+        updateStmt = updateStmt.concat(" jenis_kelamin=" + usr.getJenis_kelamin());
         updateStmt = updateStmt.concat(" tanggal_lahir='" + usr.getTanggal_lahir() + "',");
         updateStmt = updateStmt.concat(" tinggi_badan=" + usr.getTinggi_badan());
-        
         updateStmt = updateStmt.concat(" WHERE id=" + id);
         try {
             DBUtil.getInstance().dbExecuteUpdate(updateStmt);
